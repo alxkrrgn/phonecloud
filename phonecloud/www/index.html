@@ -1,0 +1,1031 @@
+<!DOCTYPE html> <html>
+<head>
+<title>YourCloud</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,
+maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="js/openfb.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</script>
+<script>
+$(document).ready(function(){       
+$('body').css('font-family', 'Times New Roman, Sans Serif');
+$('header #logotopm:first').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(1)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(2)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(3)').css('backgroundColor', 'DimGray');
+$('header #logotopm:last').css('backgroundColor', 'DimGray');
+$('#footer').css('backgroundColor', 'DimGray');
+$('#footer #navdown').css('font-weight', 'normal');
+$('#contain .btn-block').css('color', 'whitesmoke');
+$('#contain .btn-block').css('fontWeight', 'normal');
+$('#contain .btn-block').css('width', '75%');
+$('#textleftbig:first').css('border', 'none');
+$('#textleftbig:eq(1)').css('border', 'none');
+$('#textleftbig:last').css('border', 'none');
+$('#getred').css('width', '100%');	
+$('#getgreen').css('width', '100%');
+$('header').css('top', '20px');
+$('#MainPage').css('padding', '10px');
+$('#MainPage2').css('padding', '10px');
+$('#MainPage3').css('padding', '10px');
+$('#MainPage4').css('padding', '10px');
+$('#MainPage5').css('padding', '10px');
+$('#col1').css('width', '98%');
+$('#col2').css('width', '98%');
+$('#col3').css('width', '98%');
+$('#col4').css('width', '98%');
+$('button a').css('color', 'whitesmoke');
+
+$('#navFP2nd h2f').hide();
+$('#navFP2nd a').css('color', 'black');
+$('#navFP2nd a').hide();
+$('#navFP2nd h2d').css( 'cursor', 'pointer' );
+$('#navFP2nd a').css( 'cursor', 'pointer' );
+$('#navFP2nd ul li').css( 'width', '90%' );
+$('#navFP2nd ul li').css( 'text-align', 'center' );
+$('#navFP2nd ul li').css( 'float', 'left' );
+ $('#navFP2nd').hover(function() {    
+       $('#navFP2nd h2e').slideToggle('slow'); 
+});
+   $('#navFP2nd').hover(function() {        
+        $('#navFP2nd h2d').addClass('button4');
+       // $('#navFP2nd a').css('color', 'black'); 
+        $('#navFP2nd a').show('slow'); 
+});  
+  $('#navFP2nd').hover(function() {         
+    	$('#navFP2nd').css('backgroundColor', 'Silver').fadeTo('slow');
+});  
+  $('#navFP2nd a').hover(function() {         
+    	$('#navFP2nd a').css('color', 'DimGray').show('slow');
+}); 
+   $('#navFP2nd').hover(function() {    
+       $('#navFP2nd h2f').slideDown('slow');          
+}); 
+  $('#navFP2nd').click(function() {    
+       $('#navFP2nd h2f').slideToggle('slow');          
+}); 
+   $('#col1').hover(function() {   
+      $('#col1').css('backgroundColor', 'WhiteSmoke').fadeTo('slow');
+       }, function(){  
+       $('#col1 .circle1').toggleClass('button7');
+});        
+	$('#col2').hover(function() {   
+      $('#col2').css('backgroundColor', 'WhiteSmoke').fadeTo('slow');   
+       }, function(){ 
+       $('#col2 .circle4').toggleClass('button12');
+});        
+ 	$('#col3').hover(function() {   
+      $('#col3').css('backgroundColor', 'WhiteSmoke').fadeTo('slow');       
+       }, function(){ 
+       $('#col3 .circle2').toggleClass('button8');
+ }); 
+ 	$('#navFP2nd').mouseleave(function() {        
+       	$('#navFP2nd h2d').removeClass('button4');  
+        $('#navFP2nd h2f').hide('slow');
+        $('#navFP2nd a').css('color', 'black');
+        $('#navFP2nd a').hide('slow'); 
+        $('#navFP2nd').css('backgroundColor', 'LightGray').fadeTo('slow');      
+});  
+ $('#col1').mouseleave(function() {         
+    	$('#col1').css('backgroundColor', 'White').fadeTo('slow');
+});  
+ 	$('#col2').mouseleave(function() {         
+    	$('#col2').css('backgroundColor', 'White').fadeTo('slow');
+});  
+ 	$('#col3').mouseleave(function() {         
+    	$('#col3').css('backgroundColor', 'White').fadeTo('slow');
+}); 
+     /* validation */
+	$("#add_err").css('display', 'none', 'important');
+	$("#add_erreg").css('display', 'none', 'important');
+$( function() {
+    $("#popupLogin").enhanceWithin().popup();
+});  	
+	 $("#login_n").click(function(){	
+		  Email=$("#email").val().toLowerCase();
+		  Password=$("#password").val();
+		  $.ajax({
+		   type: "POST",
+		   url: "http://www.4yourcloud.com/login_ios.php",
+			data: "Email="+Email+"&Password="+Password,
+			dataType: 'json',
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: 'true',
+			cache:"false",
+		   success: function (data){  
+		   //$('#content').html(data.Email);
+			if ((data.Email == Email) && (data.Password == Password))    {
+			//$("#add_err").html("right username or password");
+			 window.location.href="home.html";
+			}
+			else if ((Email === '') || (Password === ''))  {
+			$("#add_err").css('display', 'inline', 'important');
+			$("#add_err").html("<div id=getred>Wrong/Blank email or password</div><br>");
+			}
+			else if ((data.Email !== Email) || (data.Password !== Password)) {
+			$("#add_err").css('display', 'inline', 'important');
+			$("#add_err").html("<div id=getred>Wrong email or password</div><br>");
+		   }
+		   }
+		   //beforeSend:function()
+		   //{
+			//$("#add_err").css('display', 'inline', 'important');
+			//$("#add_err").html("<img src='images/ajax-loader.gif' /> Loading...")
+		   //}
+		  });
+		return false;
+	});
+    /* login submit */ 
+    /* register submit */  
+     $("#register_n").click(function(){	
+		  Email=$("#emailreg").val().toLowerCase();
+		  Password=$("#pwreg").val();
+		  Name=$("#fullname").val();
+		  var messagereg = '';
+		  $.ajax({
+		   type: "POST",
+		   url: "http://www.4yourcloud.com/register_ios.php",
+			data: "Email="+Email+"&Password="+Password+"&Name="+Name,
+			dataType: 'json',
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: 'true',
+			cache:"false",
+		   success: function (result){  
+		   //$('#content1').html(result.Email + " ; " + result.Password);
+		   //$('#content2').html(Email + " ; " + Password);
+		   //alert(response.Email);
+		   k = result.length;
+		   for (var j = 0; j < k; j++) {
+   					
+   					if (result[j].confirm !== undefined) {
+   					messagereg += '<div id=getgreen>' + result[j].confirm + '</div>';
+   					window.location.href="home.html";
+   					}
+   					if (result[j].warning !== undefined) {
+					messagereg += '<div id=getred>' + result[j].warning + '</div>';
+					}
+   					}
+   					
+   					$('#messagereg').html("");
+   					$('#messagereg').append(messagereg);
+   					
+			/*if ((result.Email == Email) && (result.Password == Password))    {
+			//$("#add_err").html("right username or password");
+			 window.location.href="home.html";
+			}
+			else if ((Email === '') || (Password === '') || (Name === ''))  {
+			$("#add_erreg").css('display', 'inline', 'important');
+			$("#add_erreg").html("<div id=getred>Blank email, password or name</div><br>");
+			//$("#add_erreg").html("<div id=getred>" + result.warning + "</div><br>");
+			}
+			else if ((result.Email !== Email) || (result.Password !== Password)) {
+			$("#add_erreg").css('display', 'inline', 'important');
+			$("#add_erreg").html("<div id=getred>Error inserting information. Please try again</div><br>");
+		   } */
+		   }
+		   //beforeSend:function()
+		   //{
+			//$("#add_err").css('display', 'inline', 'important');
+			//$("#add_err").html("<img src='images/ajax-loader.gif' /> Loading...")
+		   //}
+		  });
+		return false;
+	});
+  /* Forgot Password */  
+     $("#forgot_n").click(function(){	
+		  EmailF=$("#email_n").val().toLowerCase();
+		  //Password=$("#pwreg").val();
+		  //Name=$("#fullname").val();
+		  var message12a = '';
+		  $.ajax({
+		   type: "POST",
+		   url: "http://www.4yourcloud.com/hforgotpass_ios.php",
+			data: "EmailF="+EmailF,
+			dataType: 'json',
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: 'true',
+			cache:"false",
+		   success: function (answer){  
+		   		k = answer.length;
+		   		//$('#klength').html(answer.length);
+		   		for (var i = 0; i < k; i++) { 
+                if (answer[i].warning !== undefined) {
+                    message12a += '<div id=getred>' + answer[i].warning + '</div>';
+                    //$('#klength').html(answer.warning);
+   				}
+   				if (answer[i].confirm !== undefined) {
+                    message12a += '<div id=getgreen>' + answer[i].confirm + '</div>';
+   				}
+   				}
+		   	$('#msglostpass').html("");
+   			$('#msglostpass').append(message12a);
+   			}
+		  });
+		return false;
+	});	
+	/* contact script */ 
+	  $("#heycon").click(function(){	
+		  Email=$("#emailcon").val().toLowerCase();
+		  Name=$("#namecon").val();
+		  Message=$("#textbox").val();
+		  var message123 = '';
+		  $.ajax({
+		   type: "POST",
+		   url: "http://www.4yourcloud.com/hfcontact_ios.php",
+			data: "Email="+Email+"&Message="+Message+"&Name="+Name,
+			dataType: 'json',
+			xhrFields: { 
+       			withCredentials: true
+  				},
+  			crossDomain: 'true',
+			cache:'false',
+		   success: function (response){  
+		   			//$('#klength').html(response.length);
+                    k = response.length;
+                    if (response.email !== undefined) {
+                    message123 += '<div id=textmid>' + response.email + '</div>';
+   					}
+                    if (response.name !== undefined) {
+                    message123 += '<div id=textmid>' + response.name + '</div>';
+   					}
+   					if (response.text !== undefined) {
+                    message123 += '<div id=textmid>' + response.text + '</div>';
+   					}
+                    if (response.warning !== undefined) {
+                    message123 += '<div id=getred>' + response.warning + '</div>';
+   					}
+   					if (response.confirm !== undefined) {
+                    message123 += '<div id=getgreen>' + response.confirm + '</div>';
+   					}
+   					///for (var j = 0; j < k; j++) {
+   					
+   					if (response[0].confirm !== undefined) {
+   					message123 += '<div id=getgreen>' + response[0].confirm + '</div>';
+   					}
+   					if (response[0].warning !== undefined) {
+					message123 += '<div id=getred>' + response[0].warning + '</div>';
+					}
+   					//}
+   					
+   					$('#message12').html("");
+   					$('#message12').append(message123);
+		  
+		   }
+		  });
+		return false;
+	});
+});
+</script>
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+<script>
+// AJAX code to check input field values when onblur event triggerd.
+function validate(field, query) {
+var xmlhttp;
+if (window.XMLHttpRequest) { // for IE7+, Firefox, Chrome, Opera, Safari
+xmlhttp = new XMLHttpRequest();
+} else { // for IE6, IE5
+xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+xmlhttp.onreadystatechange = function() {
+if (xmlhttp.readyState != 4 && xmlhttp.status == 200) {
+document.getElementById(field).innerHTML = "Validating..";
+} else if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+document.getElementById(field).innerHTML = xmlhttp.responseText;
+} else {
+document.getElementById(field).innerHTML = "Error Occurred. <a href='index.html'>Reload Or Try Again</a> the page.";
+}
+}
+xmlhttp.open("GET", "http://www.4yourcloud.com/validation.php?field=" + field + "&query=" + query, false);
+xmlhttp.send();
+}
+function goToURL() {
+     //location.href = "http://www.4yourcloud.com/upgradeprem.php";
+     window.open('http://www.4yourcloud.com/upgradeprem.php', '_blank', 'location=yes');
+
+    }
+</script>
+<style>
+.ui-icon-directions{
+    background-image:
+    url(../icons/icons-gray/113-navigation.png);
+    height:28px;
+    width:28px;
+    background-size:28px 28px;
+    margin-left: -14px !important;
+}
+.ui-content{
+      font: Times New Roman, Sans Serif;
+      color: #663300;
+  }
+.ui-dialog-contain {
+	width: 80%;
+	max-width: 350px;
+	margin: 10% auto 15px auto;
+	padding: 0;
+	position: relative;
+	top: 20px;
+} 
+</style>
+<LINK REL=STYLESHEET HREF="css/style1.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/style2.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/style3.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/style4.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/stylecloud.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/styledel.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/font-awesome.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/bootstrap-social.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/bootstrap.css" TYPE="text/css">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-78440044-1', 'auto');
+  ga('send', 'pageview');
+
+</script></head> <body> 
+<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
+  <form action="#" method="post">
+        <div style="padding:10px 20px;">
+            <h3>Contact Us:</h3> 
+            <div id="klength"></div>
+            <div id="message12"></div>  
+            <!--<label for="Name" class="ui-hidden-accessible">Name:</label>-->
+            <input type="text" name="namecon" id="namecon" value="" placeholder="Name" data-theme="a">
+            <!--<label for="Email" class="ui-hidden-accessible">Email:</label>-->
+            <input type="email" name="emailcon" id="emailcon" value="" placeholder="Email" data-theme="a">
+            <!--<label for="textbox" class="ui-hidden-accessible">Message:</label>-->
+            <textarea id=textbox name="textbox" placeholder="Your Message Here ...." rows=5 ></textarea>
+            <button type="submit" id="heycon" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">Send Message</button>
+        </div>
+    </form>
+   </div> 
+<!-- begin first page -->
+<section id="page1" data-role="page">
+<header data-role="header" data-backbtn="false"><div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header> 
+<content class="content" data-role="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="slide">Login</a></li>
+<li><a href="#page2" data-transition="slide">Register</a> </li> 
+<li><a href="#page3" data-transition="slide">Forgot Password</a></li>
+ </ul></nav>
+ <div id=MainPage>
+<div class="err" id="add_err"></div>
+<div id=content> </div>
+<div id=content1> </div>
+<div id=textleftbig>Login:</div>
+<div id=contain>
+<form action="#" method="post" id="login-form">
+<input type="email" name="Email" id="email" onblur="validate('Email', this.value)" placeholder="Email..."/>
+<div id=Email></div>
+<input type="password" name="Password" id="password" onblur="validate('Password', this.value)" placeholder="Password..."/>
+<!--<div id=Password></div>-->
+<button type="submit" id="login_n" name="login_n" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">Login</button>
+</div>
+<div id=contain>
+<!--<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"
+scope="public_profile,email" onlogin="checkLoginState();"> Log in with facebook</div>-->
+<a class="btn btn-block btn-social btn-facebook" onclick="login()"><span class="fa fa-facebook"></span>Log in with Facebook</a>
+<!--<a class="btn btn-block btn-social btn-twitter" onclick="getInfo()">Get My Info</a>
+Name: <span id="userName"></span>
+<img id="userPic"/>
+Email: <span id="fbemail"></span>-->
+</div><br/>
+<div id=contain>
+
+<a class="btn btn-block btn-social btn-google" onclick="callGoogle()"><span class="fa fa-google"></span> Log in with Google</a>
+
+  <div id="gglname"></div>
+  <div id="gglemail"></div> 
+  <!--<div id="gglpic"></div> -->
+   <img id="gglpic"/>      
+</div><br>
+<!--<div id=contain>
+<a href="http://www.4yourcloud.com/apps/twitter/index.php" class="btn btn-block btn-social btn-twitter">
+            <span class="fa fa-twitter"></span> Log in with Twitter
+          </a></div>-->
+</form>	<br><br><br></div>
+
+</content>
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop">Contact Us</a></li>
+<li><a href="#page4" data-transition="slidedown">Upgrade</a></li> 
+<li><a href="#page5" data-transition="slideup">Features</a></li> 
+</ul></nav>
+</footer>
+</section>
+
+ <!-- end first page -->
+ <!-- begin second page -->
+<section id="page2" data-role="page" data-transition="slide">
+<header data-role="header" data-backbtn="false" style="overflow:hidden;"><div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div>	
+							</header> 
+<content class="content" data-role="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="slide">Login</a></li>
+<li><a href="#page2" data-transition="slide">Register</a> </li> 
+<li><a href="#page3" data-transition="slide">Forgot Password</a></li>
+</ul></nav>
+<div id=MainPage2>
+<div class="err" id="add_erreg"></div>
+<div id="messagereg"></div>
+<div id=textleftbig>Register:</div>
+<div id=contain>
+<form action="#" method="post">
+<input type="text" name="E-mail" id="emailreg" onblur="validate('E-mail', this.value)" placeholder="Email..."/>
+<div id=E-mail></div>
+<input type="text" name="FullName" id="fullname" onblur="validate('FullName', this.value)" placeholder="Full Name..."/>
+<div id=FullName></div>
+<input type="password" name="Password" id="pwreg" onblur="validate('Pass-word', this.value)" placeholder="Password..."/>
+<div id=Pass-word></div>
+<button type="submit" id="register_n" name="register_n" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">Register</button>
+</div>
+<div id=contain>
+<a class="btn btn-block btn-social btn-facebook" onclick="login()"><span class="fa fa-facebook"></span> Register with facebook
+          </a>
+</div><br/>
+<div id=contain>
+<a class="btn btn-block btn-social btn-google" onclick="callGoogle()"><span class="fa fa-google"></span> Register with Google</a>
+        
+</div><br>
+<!--<div id=contain>
+<a href="http://www.4yourcloud.com/apps/twitter/index.php" class="btn btn-block btn-social btn-twitter">
+            <span class="fa fa-twitter"></span> Register with Twitter
+          </a></div>	-->
+</div>
+</form>	<br>
+<!--<h3>Unordered List</h3> <ul data-role="listview">
+<li>Item</li> <li>Item</li> <li>Item</li>
+</ul>
+<h3>Ordered List</h3>
+<ol data-role="listview">
+<li>Item</li> <li>Item</li> <li>Item</li>
+</ol>-->
+</div>
+
+</content>
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop">Contact Us</a></li>
+<li><a href="#page4" data-transition="slidedown">Upgrade</a></li> 
+<li><a href="#page5" data-transition="slideup">Features</a></li> 
+</ul></nav></footer>
+</section>
+
+<!-- end second page -->
+<!-- begin third page -->
+<section id="page3" data-role="page">
+<header data-role="header" data-backbtn="false"><div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="slide">Login</a></li>
+<li><a href="#page2" data-transition="slide">Register</a> </li> 
+<li><a href="#page3" data-transition="slide">Forgot Password</a></li>
+ </ul></nav>
+<div id=MainPage3>
+<div id=msglostpass> </div>
+<div id=klength> </div>
+<div id=textleftbig>Forgot password:</div>
+<div id=contain>
+<form action="#" method="post" id="forgotpass_form">
+<input type="text" name="EmailF" id="email_n" onblur="validate('EmailF', this.value)" placeholder="Account Email..."/>
+<div id=EmailF></div>
+<button type="submit" name="forgot_n" id="forgot_n" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">Retrieve Password</button>
+</form>
+</div></div>
+</content>
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop">Contact Us</a></li>
+<li><a href="#page4" data-transition="slidedown">Upgrade</a></li> 
+<li><a href="#page5" data-transition="slideup">Features</a></li> 
+</ul></nav></footer>
+</section>
+<!-- end third page -->
+<!-- begin 4th page -->
+<section id="page4" data-role="page">
+<header data-role="header" data-backbtn="false"><div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="slide">Login</a></li>
+<li><a href="#page2" data-transition="slide">Register</a> </li> 
+<li><a href="#page3" data-transition="slide">Forgot Password</a></li>
+ </ul></nav>
+<div id=MainPage4>
+<div id=contain4>
+<h1c>Your<i class="fa fa-dot-circle-o"></i>Cloud Plans:</h1c>
+</div>
+<div id=contain4>
+<div id=col1>	
+ 	<div class="circle1">Up to 5GB for free</div>
+  		</div>
+<div id=colm>	
+	<button class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">
+ 	<a href="#page2">Register</a></button>
+  		</div>  
+</div>
+<div id=contain4>
+<div id=col2>	
+ 	<div class="circle4">50GB for $1.99 a month</div>
+  		</div>
+<div id=colm>	
+	<button class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">
+ 	<a href="javascript:void(0)" onclick="goToURL(); return false;">Upgrade to 50GB</a>
+ 	</button>
+  		</div>  
+</div>
+<div id=contain4>  				
+<div id=col3>
+ 	<div class="circle2">100GB for $4.99 a month</div>
+  		</div>  
+<div id=colm>	
+	<button class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">
+ 	<a href="javascript:void(0)" onclick="goToURL(); return false;">Upgrade to 100GB</a>
+ 	</button>
+  		</div>  
+</div>  
+<div id=contain4>			
+<div id=col4>		
+ 	<div class="circle3">500GB for $9.99 a month</div>
+  		</div> 
+<div id=colm>	
+	<button class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">	
+ 	<a href="javascript:void(0)" onclick="goToURL(); return false;">Upgrade to 500GB</a>
+ 	</button>
+  		</div> 			
+</div> 
+
+<!--<button class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left"><a href="#page1">Login & Upgrade</a></button>
+<button class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left"><a href="#page2">Register & Upgrade</a></button>-->
+</div>
+</content>
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop">Contact Us</a></li>
+<li><a href="#page4" data-transition="slidedown">Upgrade</a></li> 
+<li><a href="#page5" data-transition="slideup">Features</a></li> 
+</ul></nav></footer>
+</section>
+<!-- end 4th page -->
+<!-- begin 5th page -->
+<section id="page5" data-role="page">
+<header data-role="header" data-backbtn="false"><div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="slide">Login</a></li>
+<li><a href="#page2" data-transition="slide">Register</a> </li> 
+<li><a href="#page3" data-transition="slide">Forgot Password</a></li>
+ </ul></nav>
+<div id=MainPage5>
+<div id=contain4><br/><br>
+			<h2e><img src="img/png1a/three-gears-of-configuration-tools.png" height="100" width="100"></h2e>
+			<h1c>This is How Your<i class="fa fa-dot-circle-o"></i>Cloud Works:</h1c>
+</div>
+<div id=contain4>		
+	<div id=navFP2nd>
+<ul>
+<li> 
+<h2e><i class="fa fa-files-o" style="font-size:35px;"></i></h2e>   
+<h2d>1. Choose Your Files</h2d>
+<a><i class="fa fa-arrow-circle-down" style="font-size:35px;"></i></a>
+<h2f>Choose single file, document or photo or multiple documents or photos to upload in your main directory or in specific folders or 
+subfolders you have created. You can backup all kinds of different files.<br><br>
+<div id=contain>
+<img src="img/png/png.png" height="40" width="40"><img src="img/png/jpg.png" height="40" width="40"><img src="img/png/doc.png" height="40" width="40">
+<img src="img/png/avi.png" height="40" width="40"><img src="img/png/mp3.png" height="40" width="40"><img src="img/png/mp4.png" height="40" width="40">
+<img src="img/png/pdf.png" height="40" width="40"></div>
+</h2f>
+<br></li>
+<li>  
+<h2e><i class="fa fa-upload" style="font-size:35px;" ></i></h2e> 
+<h2d>2. Upload To The Cloud</h2d>
+<a><i class="fa fa-arrow-circle-down" style="font-size:35px;"></i></a>
+<h2f>Upload to your main folder or to folders or subfolders you have created. You can organize your files whichever way you 
+like similar to what do with your file explorer in your laptop, tablet or smartphone.<br><br>
+<div id=contain>
+<img src="img/png/smartphone-1.png" height="40" width="40">
+<img src="img/png/computer.png" height="40" width="40">
+<img src="img/png/laptop.png" height="40" width="40">
+<img src="img/png1a/right-arrow.png" height="40" width="40">
+<img src="img/png1a/database.png" height="40" width="40">
+</div></h2f>
+<br></li>
+<li>
+<h2e><i class="fa fa-share-alt" style="font-size:35px;"></i></h2e>
+<h2d>3. Access And Share</h2d>
+<a><i class="fa fa-arrow-circle-down" style="font-size:35px;"></i></a>
+<h2f>Your files are secure and encrypted. Access your archives from your any or all devices and share with your friends. You can send links and invite your friends as well.<br><br>
+<div id=contain>
+<img src="img/png1a/cloud-computing.png" height="40" width="40">
+<img src="img/png1a/right-arrow.png" height="40" width="40">
+<img src="img/png1a/database.png" height="40" width="40">
+<img src="img/png1a/right-arrow.png" height="40" width="40">
+<img src="img/png1a/share.png" height="40" width="40">
+</div></h2f>
+<br></li>
+
+		</ul><br>
+	</div>
+</div>
+</div>
+</content>
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupLogin" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop">Contact Us</a></li>
+<li><a href="#page4" data-transition="slidedown">Upgrade</a></li> 
+<li><a href="#page5" data-transition="slideup">Features</a></li> 
+</ul></nav></footer>
+</section>
+<!-- end 5th page -->
+<script>
+
+</script>
+<script>
+
+     // Defaults to sessionStorage for storing the Facebook token
+     openFB.init({appId: '319322771735383'});
+
+    //  Uncomment the line below to store the Facebook token in localStorage instead of sessionStorage
+    //  openFB.init({appId: 'YOUR_FB_APP_ID', tokenStore: window.localStorage});
+
+    function login() {
+        openFB.login(
+                function(response) {
+                    if(response.status === 'connected') {
+                        //alert('Facebook login succeeded, got access token: ' + response.authResponse.accessToken);
+                        
+                         openFB.api({
+            				path: '/me',
+            				success: function(data) {
+                			//console.log(JSON.stringify(data));
+                			//document.getElementById("userName").innerHTML = data.name;
+                			//document.getElementById("userPic").src = 'https://graph.facebook.com/' + data.id + '/picture?type=small';
+                			//document.getElementById("fbemail").innerHTML = data.email;
+                			var fbimage = 'https://graph.facebook.com/' + data.id + '/picture?type=small';
+                			 $.ajax({
+		   						type: "POST",
+		   						url: "http://www.4yourcloud.com/loginfb_ios.php",
+								data: "email="+data.email+"&name="+data.name+"&id="+data.id+"&image="+fbimage,
+								dataType: 'json',
+								xhrFields: {
+       								withCredentials: true
+  										},
+  								crossDomain: 'true',
+								cache:"false",
+		   						success: function (result){  
+		   							//$('#content').html(result.Email + " ; " + result.FullName);
+		   							//$('#content1').html(data.email + " ; " + data.name);
+									if((result.Email == data.email) && (result.FullName == data.name))    {
+									//$("#add_err").html("right username or password");
+			 						window.location.href="home.html";
+			 						//alert("Emails and names match");
+										}
+								else {
+								$("#add_err").css('display', 'inline', 'important');
+								$("#add_err").html("<div id=getred>Login failed. Please try again</div><br>");
+										}
+								}
+		 			 	});
+            },
+            error: errorHandler});       
+                    } else {
+                        alert('Facebook login failed: ' + response.error);
+                    }
+                }, {scope: 'email,read_stream,publish_actions'});
+    }
+
+    function getInfo() {
+        openFB.api({
+            path: '/me',
+            success: function(data) {
+                //console.log(JSON.stringify(data));
+                
+                document.getElementById("userName").innerHTML = data.name;
+                document.getElementById("userPic").src = 'https://graph.facebook.com/' + data.id + '/picture?type=small';
+                document.getElementById("fbemail").innerHTML = data.email;
+                var fbimage = 'https://graph.facebook.com/' + data.id + '/picture?type=small';
+                 $.ajax({
+		   					type: "POST",
+		   					url: "http://www.4yourcloud.com/loginfb_ios.php",
+							data: "email="+data.email+"&name="+data.name+"&id="+data.id+"&image="+fbimage,
+							dataType: 'json',
+							xhrFields: {
+       								withCredentials: true
+  										},
+  							crossDomain: 'true',
+							cache:"false",
+		   					success: function (result){  
+		   						//$('#content').html(result.Email);
+								if((result.Email == data.email) && (result.FullName == data.name))    {
+								//$("#add_err").html("right username or password");
+			 					window.location.href="home.html";
+			 					//alert("Emails and names match");
+										}
+							else {
+							$("#add_err").css('display', 'inline', 'important');
+							$("#add_err").html("<div id=getred>Login failed. Please try again</div><br>");
+										}
+								}
+	
+		 			 	});
+            },
+            error: errorHandler});
+    }
+
+    function share() {
+        openFB.api({
+            method: 'POST',
+            path: '/me/feed',
+            params: {
+                message: document.getElementById('Message').value || 'Testing Facebook APIs'
+            },
+            success: function() {
+                alert('the item was posted on Facebook');
+            },
+            error: errorHandler});
+    }
+
+    function readPermissions() {
+        openFB.api({
+            method: 'GET',
+            path: '/me/permissions',
+            success: function(result) {
+                alert(JSON.stringify(result.data));
+            },
+            error: errorHandler
+        });
+    }
+
+    function revoke() {
+        openFB.revokePermissions(
+                function() {
+                    alert('Permissions revoked');
+                },
+                errorHandler);
+    }
+
+    function logout() {
+        openFB.logout(
+                function() {
+                    alert('Logout successful');
+                },
+                errorHandler);
+    }
+
+    function errorHandler(error) {
+        alert(error.message);
+    }
+
+</script>
+<script>
+var googleapi = {
+    authorize: function(options) {
+        var deferred = $.Deferred();
+         //Build the OAuth consent page URL
+        var authUrl = 'https://accounts.google.com/o/oauth2/auth?' + $.param({
+            client_id: options.client_id,
+            redirect_uri: options.redirect_uri,
+            response_type: 'code',
+            scope: options.scope
+        });
+
+        //Open the OAuth consent page in the InAppBrowser
+        var authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
+
+        //The recommendation is to use the redirect_uri "urn:ietf:wg:oauth:2.0:oob"
+        //which sets the authorization code in the browser's title. However, we can't
+        //access the title of the InAppBrowser.
+        //
+        //Instead, we pass a bogus redirect_uri of "http://localhost", which means the
+        //authorization code will get set in the url. We can access the url in the
+        //loadstart and loadstop events. So if we bind the loadstart event, we can
+        //find the authorization code and close the InAppBrowser after the user
+        //has granted us access to their data.
+        $(authWindow).on('loadstart', function(e) {
+            var url = e.originalEvent.url;
+            var code = /\?code=(.+)$/.exec(url);
+            var error = /\?error=(.+)$/.exec(url);
+
+            if (code || error) {
+                //Always close the browser when match is found
+                authWindow.close();
+            }
+
+            if (code) {
+                //Exchange the authorization code for an access token
+                $.post('https://accounts.google.com/o/oauth2/token', {
+                    code: code[1],
+                    client_id: options.client_id,
+                    client_secret: options.client_secret,
+                    redirect_uri: options.redirect_uri,
+                    grant_type: 'authorization_code'
+                }).done(function(data) {
+                    deferred.resolve(data);
+
+                    $("#loginStatus").html('Name: ' + data.given_name);
+                }).fail(function(response) {
+                    deferred.reject(response.responseJSON);
+                });
+            } else if (error) {
+                //The user denied access to the app
+                deferred.reject({
+                    error: error[1]
+                });
+            }
+        });
+
+        return deferred.promise();
+    }
+};
+var accessToken;
+var UserData = null;
+
+function callGoogle() {
+
+    //  alert('starting');
+    googleapi.authorize({
+        client_id: '92859681535-hhimp4cvi27pji2hqlrkcsisjmn85iaq.apps.googleusercontent.com',
+        client_secret: '3XgBSe0VQLUy5MqWesZHlRR2',
+        redirect_uri: 'http://127.0.0.1:3000',
+        scope: 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
+    }).done(function(data) {
+        accessToken = data.access_token;
+        // alert(accessToken);
+        // $loginStatus.html('Access Token: ' + data.access_token);
+        console.log(data.access_token);
+        console.log(JSON.stringify(data));
+        getDataProfile();
+        //loginGoogle();
+
+    });
+
+}
+
+// This function gets data of user.
+function getDataProfile() {
+    var term = null;
+    //  alert("getting user data="+accessToken);
+    $.ajax({
+        url: 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + accessToken,
+        type: 'GET',
+        data: term,
+        dataType: 'json',
+        error: function(jqXHR, text_status, strError) {},
+        success: function(data) {
+            var item;
+
+            console.log(JSON.stringify(data));
+            // Save the userprofile data in your localStorage.
+            localStorage.gmailLogin = "true";
+            localStorage.gmailID = data.id;
+            localStorage.gmailEmail = data.email;
+            localStorage.gmailFirstName = data.given_name;
+            localStorage.gmailLastName = data.family_name;
+            localStorage.gmailProfilePicture = data.picture;
+            localStorage.gmailGender = data.gender;
+            
+            document.getElementById("gglname").innerHTML = data.name;
+            document.getElementById("gglpic").src = data.picture;
+            //document.getElementById("gglpic").innerHTML =  data.picture;
+            document.getElementById("gglemail").innerHTML = data.email;   
+                $.ajax({
+		   					type: "POST",
+		   					url: "http://www.4yourcloud.com/loginfb_ios.php",
+							data: "email="+data.email+"&name="+data.name+"&id="+data.id+"&image="+data.picture,
+							dataType: 'json',
+							xhrFields: {
+       								withCredentials: true
+  										},
+  							crossDomain: 'true',
+							cache: "false",
+		   					success: function (result) {  
+		   						//$('#content').html(result.Email);
+								if((result.Email == data.email) && (result.FullName == data.name))    {
+								//$("#add_err").html("right username or password");
+			 					window.location.href="home.html";
+			 					//alert("Emails and names match");
+										}
+							else {
+							$("#add_err").css('display', 'inline', 'important');
+							$("#add_err").html("<div id=getred>Login failed. Please try again</div><br>");
+										}
+								}
+				});	
+			}				 	       
+    });
+   // disconnectUser();
+}
+function loginGoogle() {
+    $.ajax({
+		   					type: "POST",
+		   					url: "http://www.4yourcloud.com/loginfb_ios.php",
+							data: "email="+data.email+"&name="+data.name+"&id="+data.id+"&image="+data.picture,
+							dataType: 'json',
+							xhrFields: {
+       								withCredentials: true
+  										},
+  							crossDomain: 'true',
+							cache: "false",
+		   					success: function (result) {  
+		   						$('#content').html(result.Email);
+								if((result.Email == data.email) && (result.FullName == data.name))    {
+								//$("#add_err").html("right username or password");
+			 					window.location.href="home.html";
+			 					alert("Emails and names match");
+										}
+							else {
+							$("#add_err").css('display', 'inline', 'important');
+							$("#add_err").html("<div id=getred>Login failed. Please try again</div><br>");
+										}
+								}
+				});	
+}
+
+function disconnectUser() {
+    var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' + accessToken;
+
+    // Perform an asynchronous GET request.
+    $.ajax({
+        type: 'GET',
+        url: revokeUrl,
+        async: false,
+        contentType: "application/json",
+        dataType: 'jsonp',
+        success: function(nullResponse) {
+            // Do something now that user is disconnected
+            // The response is always undefined.
+            accessToken = null;
+            console.log(JSON.stringify(nullResponse));
+            console.log("-----signed out..!!----" + accessToken);
+        },
+        error: function(e) {
+            // Handle the error
+            // console.log(e);
+            // You could point users to manually disconnect if unsuccessful
+            // https://plus.google.com/apps
+        }
+    });
+}
+</script>
+</body>
+</html>

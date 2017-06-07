@@ -1,0 +1,201 @@
+#TopImage { position:relative;float:left; top:0;width: 100%;margin: 0; height: 400px;font-size: 2.25em;font-weight: bold;color:LightGoldenRodYellow;
+border: none;text-shadow: black 0.2em 0.2em 0.3em;letter-spacing: 0px;line-height: 100%;text-align:center;
+vertical-align:center; word-wrap: break-word;
+}
+#MiddleImage { position:relative;float:left;top:0;width: 50%;margin: 0; height: 200px;font-size: 1.5em;font-weight: bold;color:LightGoldenRodYellow;
+border: none;text-shadow: black 0.2em 0.2em 0.3em;letter-spacing: 0px;line-height: 100%;text-align:center;vertical-align:center;
+}
+div.EndImageMobile	{
+position:relative; width: 100%;margin: 0; height: 450px;font-size: 2.0em;font-weight: regular;color:Black;text-shadow: 1px 1px LightGoldenRodYellow;
+border: none;/*text-shadow: black 0.2em 0.2em 0.3em;*/letter-spacing: 0px;text-align:center;float:center;
+background: LightSlateGray;opacity: 1.0;vertical-align:center;
+}
+div.transboxm {
+  position:relative;
+  float:left;
+  text-align:center;
+  margin:0;
+  background-color: LightGray;
+  border: 1px solid DarkGray;
+  opacity: 0.75;
+  filter: alpha(opacity=75); /* For IE8 and earlier */
+  width:80%;
+  left:10%;
+}
+div.transboxm p {
+ text-align:center;
+  margin: 5%;
+/*  font-weight: bold;
+  color: #000000; */
+}
+#TopImage600 { position:relative;float:left; top:0;width: 100%;margin: 0; height: 600px;font-size: 3.5em;font-weight: normal;color:LightGoldenRodYellow;
+border: none;text-shadow: black 0.2em 0.2em 0.3em;letter-spacing: 0;line-height: 100%;text-align:center;
+vertical-align:center; word-wrap: break-word;
+}
+#TopImage300 { position:relative;float:left; top:0;width: 100%;margin: 0; height: 300px;font-size: 2.5em;font-weight: normal;color:LightGoldenRodYellow;
+text-shadow: 1px 1px 2px black, 0 0 25px SlateGray, 0 0 5px DarkSlateGray;letter-spacing: 0px;line-height: 100%;text-align:center;
+vertical-align:center; word-wrap: break-word;border: none;
+}
+#TopImageLogin { position:relative;float:left; top:0;width: 100%;margin: 0; height: 250px;font-size: 2.5em;font-weight: normal;color:LightGoldenRodYellow;
+text-shadow: 1px 1px 2px black, 0 0 25px SlateGray, 0 0 5px DarkSlateGray;letter-spacing: 0px;line-height: 100%;text-align:center;
+vertical-align:center; word-wrap: break-word;border: 2px solid DarkGray;
+}
+#MiddleImage250 { position:relative;float:left;top:0;width: 50%;margin: 0; height: 250px;font-size: 1.75em;font-weight: normal;color:LightGoldenRodYellow;
+border: none;text-shadow: black 0.2em 0.2em 0.3em;letter-spacing: 0px;line-height: 100%;text-align:center;vertical-align:center;
+}
+#MiddleText250 { position:relative;float:left;top:0;width: 50%;margin: 0; height: 250px;font-size: 1.5em;font-weight: normal;color:Black;
+border: none;text-shadow: none;letter-spacing: 0;line-height: 120%;text-align:left;vertical-align:center;
+background: WhiteSmoke;
+}
+#MiddleTextm { position:relative;float:left;top:0;width: 50%;margin: 0; height: 200px;font-size: 12px;font-weight: normal;color:Black;
+border: none;text-shadow: none;letter-spacing: 0;line-height: 120%;text-align:left;vertical-align:center;
+background: WhiteSmoke;
+}
+div.EndImage600	{
+position:relative; width: 100%;margin: 0; height: 600px;font-size: 2.0em;font-weight: normal;color:Black;text-shadow: 1px 1px LightGoldenRodYellow;
+border: none;/*text-shadow: black 0.2em 0.2em 0.3em;*/letter-spacing:0;text-align:center;float:center;
+background: LightSlateGray;opacity: 1.0;vertical-align:center;
+}
+div.transbox {
+  position:relative;
+  float:left;
+  text-align:center;
+  margin: 30px;
+  background-color: LightGray;
+  border: 1px solid DimGray;
+  opacity: 0.85;
+  filter: alpha(opacity=85);    /*For IE8 and earlier */
+  width:45%;
+  left:25%;
+}
+div.transbox p {
+ text-align:center;
+  margin: 5%;
+/*  font-weight: bold;
+  color: #000000; */
+}
+#logotopm {float:left;width:100%;background:transparent;vertical-align: top;
+}
+#Margin100 { /*background: LightGray;border:2px solid LightGray;*/float:left; margin:100px 0 100px 0;width:100%;
+}
+#MgBottom100 { float:left; margin:0 0 100px 0;width:100%; 
+}
+#MgBottom50 { float:left; margin:0 0 50px 0;width:100%; 
+}
+#Margin50 { background: LightGray;border:2px solid LightGray;float:left; margin:100px 0 100px 0;width:100%; padding:100px 0 100px 0;
+border-radius:25px;
+}
+#Mgn50 { /*background: LightGray;border:2px solid LightGray;*/float:left; margin:50px 0 50px 0;width:100%;
+}
+#searchdrop { position:relative;padding:15px 100px 15px 100px;margin-bottom:3px;background:#00FFFF;vertical-align:center;
+border:1px solid DimGray;overflow: hidden;}
+#folderdrop { position:relative;padding:15px 100px 15px 100px;margin-bottom:3px;background:#00FF00;vertical-align:center;
+border:1px solid DimGray;overflow: hidden;}
+div.opacity75 {filter:alpha(opacity=75);-moz-opacity: 0.75; opacity: 0.75;-khtml-opacity: 0.75;
+}
+div.opacity75:hover {filter:alpha(opacity=100); -moz-opacity: 1.0; opacity: 1.0;-khtml-opacity: 1.0;
+}
+.navtopm {background: DarkGray;list-style-type: none;font-size:small;margin:0px;padding:0px;
+border:none;width: 100%;overflow: hidden;vertical-align:center;text-align: center;float:center;
+}
+.navtopm ul {padding:1px;margin:1px;overflow: auto;float:center;vertical-align:center;text-align: center;
+}
+.navtopm li {display: inline-block; text-align: right;
+}
+.navtopm li a {text-decoration: none;color: #50394C;width: 100%;
+}
+.navtopm li a:hover {background: none ;border:none;text-decoration: none;color:#000066;
+}
+.navtopm #current {background: none;border-bottom: none ;padding-bottom: 0px;
+}
+.navtopm #current a {padding-bottom: 0px;color: #0000FF;
+}
+.navtopm #current li {background-color: #f8f8ff transparent;
+}
+.navtopmid {background: none;list-style-type: none;font-size:small;margin:0px;padding:0px;
+border:none;width: 100%;overflow: hidden;vertical-align:center;text-align: center;float:center;
+}
+.navtopmid ul {padding:1px;margin:1px;overflow: auto;float:center;vertical-align:center;text-align: center;
+}
+.navtopmid li {display: inline-block; text-align: right;
+}
+.navtopmid li a {text-decoration: none;color: #50394C;width: 100%;
+}
+.navtopmid li a:hover {background: none ;border:none;text-decoration: none;color:#000066;
+}
+.navtopmid #current {background: none;border-bottom: none ;padding-bottom: 0px;
+}
+.navtopmid #current a {padding-bottom: 0px;color: #0000FF;
+}
+.navtopmid #current li {background-color: #f8f8ff transparent;
+}
+.circle1
+{
+float:left;
+width:98%;
+height:250px;
+border-radius:50%;
+border:2px solid Green;
+font-size:25px;
+color:black;
+line-height:200px;
+text-align:center;
+background:#39FF14;
+}
+.circle2
+{
+float:left;
+width:98%;
+height:250px;
+border-radius:50%;
+border:2px solid Maroon;
+font-size:25px;
+color:black;
+line-height:200px;
+text-align:center;
+background:MistyRose;
+}
+.circle3
+{
+float:left;
+width:98%;
+height:250px;
+border-radius:50%;
+border:2px solid Navy;
+font-size:25px;
+color:black;
+line-height:200px;
+text-align:center;
+background:Cyan;
+}
+.circle4
+{
+float:left;
+width:98%;
+height:250px;
+border-radius:50%;
+border:2px solid blue;
+font-size:25px;
+color:black;
+line-height:200px;
+text-align:center;
+background:LightGoldenRodYellow;
+}
+.circle5
+{
+float:left;
+width:98%;
+height:250px;
+border-radius:50%;
+border:2px solid Sienna;
+font-size:25px;
+color:black;
+line-height:200px;
+text-align:center;
+background:PeachPuff;
+}
+a[href], input[type='submit'], input[type='image'], label[for], select, button, .pointer {
+       cursor: pointer;
+}
+#fb { font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+font-size: 11px; color:WhiteSmoke; background-color:#3B5998; }

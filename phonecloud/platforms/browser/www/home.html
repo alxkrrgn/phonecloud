@@ -1,0 +1,1768 @@
+<!DOCTYPE html> <html>
+<head>
+<title>YourCloud</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,
+maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; media-src *; img-src * filesystem: data:">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="cordova.js" type="text/javascript" charset="utf-8"></script> 
+<script type="text/javascript" src="js/jquery.mobile.paramsHandler-1.4.3.js"></script>
+<script type="text/javascript" src="js/example.js"></script>
+<script src="js/jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.modal.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="css/jquery.modal.min.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/jquery.modal.css" type="text/css" media="screen" />
+<script>
+$(document).ready(function(){
+ $(window).load(function() { 
+     	$('td a').css('fontSize', '12px');
+		$('td a').css('color', '#663300');
+		$('td a').css('fontWeight', 'normal');
+  });
+   $('.add_more').click(function(e){
+        e.preventDefault();
+        $(this).before("<input name='file[]' type='file' />");
+    });
+var fotoarray = [];
+var k = 0;
+var iNumfoto;
+function getHttpPath(abc) {
+			document.getElementById("fotocontent").src = array[abc];
+		  	document.getElementById("httpFotoLink").innerHTML = 'HTTPPATH: ' + array[abc];
+		  	document.getElementById("httpFotoNum").innerHTML = 'Photo Number: ' + abc;
+		  	document.getElementById("foto1").src = array[abc];
+		  	}
+/*$('#MainPage4 table tr > td:nth-child(2)').click(function(){
+//$('#MainPage4 table tr > td:nth-child(2)').on('click','.runMyFunction', function() {
+ alert("function is running");
+ var fileid = $(this).val();
+ //alert(fileid);
+   $.ajax({
+		   type: "POST",
+		   url: "http://www.4yourcloud.com/hfpid_ios.php",
+			data: "pid="+fileid,
+			dataType: 'json',
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: 'true',
+			cache:"false",
+		   success: function (data){  
+		   $('#contentid').html(data.Email);
+			if (data.filename == fileid)  {
+			//$("#add_err").html("right username or password");
+			document.getElementById("fotocontent").src = data.httppath;
+			window.location.href="#page8";
+			}
+			else {
+			$("#add_err").css('display', 'inline', 'important');
+			$("#add_err").html("<div id=getred>filename wrong or not existing</div><br>");
+			}
+		   }
+		  });
+ });
+ $('#MainPage5 #contain #mainright').click(function(){
+ alert("function is running");
+ var fileid = $(this).val();
+ alert(fileid);
+ }); */
+ $("#fileinfo").submit(function(){
+      var input = document.getElementById("files"),
+      formdata = false;
+    
+  if (window.FormData) {
+    formdata = new FormData();
+    //document.getElementById("upload").style.display = "none";
+    $('#formdata').html("formdata created");
+  }
+    function showUploadedItem (source) {
+  		var list = document.getElementById("image-list"),
+      	li   = document.createElement("li"),
+      	img  = document.createElement("img");
+    	img.src = source;
+    	li.appendChild(img);
+  		list.appendChild(li);
+	} 
+	
+	if (input.addEventListener) {
+  	input.addEventListener("change", function (evt) {
+    	var i = 0, len = this.files.length, img, reader, file;
+    
+    	document.getElementById("response").innerHTML = "Uploading . . ."
+    
+    	for ( ; i < len; i++ ) {
+      		file = this.files[i];
+  
+    //  if (!!file.type.match(/image.)) {
+
+     // } 
+    		}
+      
+  	 }, false);
+	}
+if ( window.FileReader ) {
+  reader = new FileReader();
+  reader.onloadend = function (e) { 
+    showUploadedItem(e.target.result);
+  };
+  reader.readAsDataURL(file);
+}
+if (formdata) {
+  formdata.append("file", file);
+  alert(formdata);
+}
+
+if (formdata) {
+  $.ajax({
+    url: "http://www.4yourcloud.com/hfupload.php",
+    type: "POST",
+    data: formdata,
+    processData: false,
+    contentType: false,
+    success: function (res) {
+      document.getElementById("response").innerHTML = res; 
+      $('#uploadwarning').html(res[1].warning);
+		$('#uploadfname').html(res[0].filename);
+            },       
+            error: function(res) {
+		$('#uploadwarning').html(res[1].warning);
+             } 
+  });
+}
+});
+/*
+    var i = 0, len = filedata.files.length, img, reader, file;
+    alert(filedata.files.length);
+
+    for (i = 0; i < len; i++) {
+        file = filedata.files[i];
+
+        if (window.FileReader) {
+            reader = new FileReader();
+            reader.onloadend = function(e) {
+                showUploadedItem(e.target.result, file.fileName);
+            };
+            reader.readAsDataURL(file);
+        }
+        if (formdata) {
+            formdata.append("file", file);
+            $('#fileappend').html("File appended");
+        }
+    }
+    if (formdata) {
+        $.ajax({
+            url: "http://www.4yourcloud.com/hfupload_ios.php",
+            type: "POST",
+            data: formdata,
+            processData: false,
+            contentType: false,
+            success: function(res) {
+		$('#uploadwarning').html(res[1].warning);
+		$('#uploadfname').html(res[0].filename);
+            },       
+            error: function(res) {
+		$('#uploadwarning').html(res[1].warning);
+             }       
+             });
+            }
+        }); */
+        
+  $.ajax({
+		   type: "GET",
+		   url: "http://www.4yourcloud.com/home_ios.php",
+			dataType: "json",
+			data: { get_param: 'value' },
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: true,
+			async: "false",
+			cache: "false",
+			//data: "key="+key+"&page="+page,
+			contentType: "application/json; charset=utf-8",
+			 error: function (xhr, status) {
+            alert(status);
+        		},	
+		   success: function (datajson){  
+		
+		     var k = 999999;
+			
+        	for (var i = 0; i < datajson.length; i++) {
+        	
+        		  var row = "<tr>";
+             	  var tdfolder = '<td><img src="img/folder.png" height="15" width="18"></td><td>';
+             	  var tdone = '</td><td>';
+             	  var upload = '<a href="#page6?key=' + datajson[i].foldername + '&page=' + k + '" data-transition="pop" >' + 'Upload<i class="fa fa-upload" id=fa15></i>' + '</a>';
+             	  var uploadshare = '<a href="#page6?key=' + datajson[i].foldername + '&page=' + k + '" data-transition="pop" >' + '<i class="fa fa-upload" id=fa15></i>' + '</a>';
+             	  var tdtwo = '</td><td></td></tr>';
+             	  var tdthree = '</td><td></td><td></td><td></td></tr>';
+             	  var result = '';
+             	  var resultshare = '';
+   			
+   			//alert(row);
+   			result += row + tdfolder;
+   			resultshare += row + tdfolder;
+   			//alert(result);
+			result += '<a href="#page9?id=' + i + '&folderName=' + datajson[i].foldername + '" data-transition="pop" >' + datajson[i].foldername + '</a>';
+			resultshare += '<a href="#page9?id=' + i + '&folderName=' + datajson[i].foldername + '" data-transition="pop" >' + datajson[i].foldername + '</a>';
+			//alert(result);
+			result += tdone + upload + tdtwo; 
+			resultshare += tdone + uploadshare + tdthree; 
+			//alert(result);
+   			//result.append(row + tdfolder + html(datajson[i].foldername) + tdtwo);
+   			$('#bodypage3').append(result);
+   			$('#TablePage2 tr:last').after(resultshare);
+   			$('td a').css('fontSize', '12px');
+			$('td a').css('color', '#663300');
+			$('td a').css('fontWeight', 'normal');
+   			//$('#TablePage3 tr:last').after(result);
+   			//$('#TablePage4 tr:last').after(result);
+   			$('#TablePage1 tr:last').after(result);
+   			$('td a').css('fontSize', '12px');
+			$('td a').css('color', '#663300');
+			$('td a').css('fontWeight', 'normal');
+   		
+            }
+            //if (datajson=='correct') {
+            //$('#content').html('<b>Link is working</b>');
+            //}
+            //document.getElementById("numofFolders").innerHTML = i;
+           
+		   }
+	});	
+		  $.ajax({
+		   type: "GET",
+		   url: "http://www.4yourcloud.com/hfile_ios.php",
+			dataType: "json",
+			data: { get_param: 'value' },
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: true,
+			async: "false",
+			cache: "false",
+			//data: "key="+key+"&page="+page,
+			contentType: "application/json; charset=utf-8",
+			 error: function (xhr, status) {
+            alert(status);
+        		},	
+		   success: function (filejson){  
+		   	//$('#content').html('<b>it is working</b>');
+			//$('#content1').append(html(datajson[0].foldername));
+			//$('#content1').append(html(datajson[1].foldepath));
+			//alert(datajson.length);
+		     //var row;
+		     //var tdfolder;
+		     //var tdtwo;
+
+        	for (var i = 0; i < filejson.length; i++) {
+        	
+        	function humanFileSize(size) {
+    		var j = Math.floor( Math.log(size) / Math.log(1024) );
+  		  	return ( size / Math.pow(1024, j) ).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][j];
+			};
+			
+			var docs = ['pdf','PDF','psd','PSD','ai','AI','eps','EPS','ps','PS','lrf','LRF','lrx','LRX','djvu','DJVU','ibooks','IBOOKS','inf','INF','PRC','prc','mobi','MOBI','pkg','PKG','opf','OPF','doc','docx','pages','PAGES','epub','EPUB','pdb','PDB','fb2','xeb','ceb','azw3','azw','kf8','lit','oxps','OXPS','xps','XPS','xls','xlsx','DOC','DOCX','XLS','XLSX'];
+			var	images = ['png','jpe','jpeg','jpg','gif','bmp','ico','tiff','tif','svg','svgz','JPG','JPE','JPEG','GIF','PNG','BMP','TIF','TIFF','SVG','SVGZ','ICO'];
+       		var media = ['mng','MNG','avi','AVI','mov','MOV','qt','QT','WMV','wmv','mp3','MP3','MP4','mp4'];
+       		//var ext = filejson[i].filename.replace(/.*\./, '').toLowerCase();
+       		var fileName = filejson[i].filename;
+       		var ext = fileName.substr(fileName.lastIndexOf('.') + 1);
+       		
+       		if (!!(docs.indexOf(ext)+1)) {
+       		var iframe = '<a href="#page7?id=' + i + '&path=' + encodeURIComponent(filejson[i].httppath) + '" data-transition="pop" >' + filejson[i].filename + '</a>';
+       		}
+       		else if (!!(images.indexOf(ext)+1)) {
+       		var iframe = '<a href="#page8?id=' + i + '&path=' + encodeURIComponent(filejson[i].httppath) + '" data-transition="pop" >' + filejson[i].filename + '</a>';
+       		} 
+       		else if (!!(media.indexOf(ext)+1)) {
+       		var iframe = '<a href="#page8?id=' + i + '&path=' + encodeURIComponent(filejson[i].httppath) + '" data-transition="pop" >' + filejson[i].filename + '</a>';
+       		} 
+       		else {
+       		var iframe = filejson[i].filename;
+       		}
+        		  var row = "<tr>";
+             	  var tdfolder = '<td><i class="'+ filejson[i].Icon + '" id=fa15></td><td>';
+             	  var dlshare = '</td><td><a><i class="fa fa-download" id=fa15></i></a><td><a href="#popupShare"?id=' + i + '&filepath=' + encodeURIComponent(filejson[i].filepath) + '" data-rel="popup" data-position-to="window" data-transition="pop"><i class="fa fa-share-alt" id=fa15></i></a>';
+             	  var tdtwo = '</td><td>' + humanFileSize(filejson[i].size) + '</td><td>' + filejson[i].RegDate + '</td></tr>';
+             	  var result = '';
+             	  var resultshare = '';
+   			
+   			//alert(row);
+   			result += row + tdfolder + iframe + tdtwo;
+   			resultshare += row + tdfolder + iframe + dlshare + tdtwo;
+			//alert(result);
+   			//result.append(row + tdfolder + html(datajson[i].foldername) + tdtwo);
+   			$('#bodypage3').append(result);
+   			$('#TablePage2 tr:last').after(resultshare);
+   			$('td a').css('fontSize', '12px');
+			$('td a').css('color', '#663300');
+			$('td a').css('fontWeight', 'normal');
+   			$('#TablePage1 tr:last').after(result);
+   			$('td a').css('fontSize', '12px');
+			$('td a').css('color', '#663300');
+			$('td a').css('fontWeight', 'normal');
+   			//$('#TablePage3 tr:last').after(result);
+   			//result.append(row + tdfolder + html(datajson[i].folderpath) + tdtwo);
+   			//console.log(result);
+   			// result += row + tdfolder + tdtwo; 
+   
+            //tr.append("<td>" + html(datajson[i].folderpath) + "</td>");
+            //tr.append("<td>" + html(datajson[i].Uid) + "</td>");
+           
+            //$('#content3').html(result);
+            }
+            //var id = data[0];              //get id
+        	//var vname = data[1];           //get name
+            //$('#output').html("<b>id: </b>"+id+"<b> name: </b>"+vname); //Set output element html
+            
+   			// var htmlStr = '';
+    		//$.each(results, function(k, v){
+        			//htmlStr += v[k] + ' ' + '<br />';
+   				//});
+   		   //$("#page").html(htmlStr);
+   		   //var obj = JSON.parse(results);
+			//jQuery.each(obj, function(i, obj) {
+  			//$("#page").html(obj.id + " " + obj.name);
+			//});
+		   //var arrFolder = $.parseJSON(results);
+			//$("#page1").html(arrFolder);
+		   }
+	});	
+	$.ajax({
+		   type: "GET",
+		   url: "http://www.4yourcloud.com/hfbooks_ios.php",
+			dataType: "json",
+			data: { get_param: 'value' },
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: true,
+			async: "false",
+			cache: "false",
+			//data: "key="+key+"&page="+page,
+			contentType: "application/json; charset=utf-8",
+			 error: function (xhr, status) {
+            alert(status);
+        		},	
+		   success: function (bookjson){  
+        	for (var i = 0; i < bookjson.length; i++) {
+        	var bookarray = [];
+        	var y = 0;
+        	function humanFileSize(size) {
+    		var j = Math.floor( Math.log(size) / Math.log(1024) );
+  		  	return ( size / Math.pow(1024, j) ).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][j];
+			};
+			//document.getElementById("filecontent").data = bookjson[i].httppath;
+        		  var row = "<tr>";
+             	  var tdfolder = '<td><i class="'+ bookjson[i].Icon + '" id=fa15></td><td>';
+             	  var tdtwo = '</td><td>' + humanFileSize(bookjson[i].size) + '</td><td>' + bookjson[i].RegDate + '</td></tr>';
+             	  var iframebook = '<a href="#page7?id=' + i + '&path=' + encodeURIComponent(bookjson[i].httppath) + '" data-transition="pop" >' + bookjson[i].filename + '</a>';
+             	  var result1 = '';
+   				  bookarray.push(bookjson[i].httppath);
+   					
+   			result1 += row + tdfolder + iframebook + tdtwo;
+   			//y = Math.floor((Math.random() * i) + 1);
+		  	//document.getElementById("filecontent").src = bookarray[y];
+		  	//document.getElementById("numofBooks").innerHTML = 'Number of Books: ' + i;
+		  	//document.getElementById("httpLink").innerHTML = 'httplink: ' + bookjson[i].httppath;
+			//alert(result);
+   			//result.append(row + tdfolder + html(datajson[i].foldername) + tdtwo);
+   			$('#bodypage3').append(result1);
+   			$('#TablePage3 tr:last').after(result1);
+   			$('td a').css('fontSize', '12px');
+			$('td a').css('color', '#663300');
+			$('td a').css('fontWeight', 'normal');
+            }
+		   }
+	});	
+		$.ajax({
+		   type: "GET",
+		   url: "http://www.4yourcloud.com/hfotos_ios.php",
+			dataType: "json",
+			data: { get_param: 'value' },
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: true,
+			async: "false",
+			cache: "false",
+			//data: "key="+key+"&page="+page,
+			contentType: "application/json; charset=utf-8",
+			 error: function (xhr, status) {
+            alert(status);
+        		},	
+		success: function (fotojson){  
+		    var array = [];
+        	var x = 0;
+        	iNumfoto = fotojson;
+        	//alert ("Number of Photos: " + iNumfoto.length);		
+				for (var l = 0; l < iNumfoto.length; l++) {
+            	var fotoid = 'fotoLink' + l;
+            	var fotocontent = 'fotocontent' + l;
+				$("#" + fotoid).trigger(function(){
+                x = l;
+		  		document.getElementById(fotocontent).src = array[l];
+		  		//document.getElementById("httpFotoLink").innerHTML = 'HTTPPATH: ' + array(0);
+		  		//document.getElementById("httpFotoNum").innerHTML = 'Photo Number: ' + 0;
+		  		//document.getElementById("foto1").src = array[0];
+            	});
+            	}
+            //alert ("fotoid: " + fotoid);
+        	for (var i = 0; i < fotojson.length; i++) {
+        	
+        	function humanFileSize(size) {
+    		var j = Math.floor( Math.log(size) / Math.log(1024) );
+  		  	return ( size / Math.pow(1024, j) ).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][j];
+			};
+			
+			array.push(fotojson[i].httppath);
+            fotoarray.push(fotojson[i].httppath);
+            	
+			//document.getElementById("fotocontent").src = fotojson[i].httppath;
+        		  var row = "<tr>";
+             	  var tdfolder = '<td><i class="'+ fotojson[i].Icon + '" id=fa15></td><td>';
+             	  var tdtwo = '</td><td>' + humanFileSize(fotojson[i].size) + '</td><td>' + fotojson[i].RegDate + '</td></tr>';
+             	  //var iframefoto = '<a href="#" class="runMyFunction" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="flip">' + fotojson[i].filename + '</a>';
+             	  var iframefoto = '<a href="#page8?id=' + i + '&path=' + encodeURIComponent(fotojson[i].httppath) + '" data-transition="pop" >' + fotojson[i].filename + '</a>';
+             	  //var iframefoto = '<div id="fileid">' + fotojson[i].filename + '</div>';
+             	  //var iframefoto = fotojson[i].filename;
+             	  var result3 = '';
+           	  
+   			result3 += row + tdfolder + iframefoto + tdtwo;
+   			
+			/*function printarray() {
+		  		x = i;
+		  		document.getElementById("fotocontent").src = array[x];
+		  		window.location.href="home.html#page8";
+						};*/
+			//alert(result);
+   			//result.append(row + tdfolder + html(datajson[i].foldername) + tdtwo);
+   			//$('#bodypage3').append(result2);
+   			//iframefoto.click(myFunction);
+   			
+   			//x = Math.floor((Math.random() * i) + 1);
+		  	//document.getElementById("fotocontent").src = array[x];
+   			$('#TablePage4 tr:last').after(result3);
+   			$('td a').css('fontSize', '12px');
+			$('td a').css('color', '#663300');
+			$('td a').css('fontWeight', 'normal');
+   			
+   			document.getElementById("numOfFotos").innerHTML = 'Number of Photos: ' + i;
+   			
+   			//$('#MainPage4 table tr > td:nth-child(2)').on('click', '.runMyFunction', myFunction);
+   			//document.getElementById("fotocontent").src = array[x];
+            }
+		   }
+	});	
+		$.ajax({
+		   type: "GET",
+		   url: "http://www.4yourcloud.com/hgglpics_ios.php",
+			dataType: "json",
+			data: { get_param: 'value' },
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: true,
+			async: "false",
+			cache: "false",
+			contentType: "application/json; charset=utf-8",
+			 error: function (xhr, status) {
+            alert(status);
+        		},	
+		   success: function (fbggljson){  
+		   		//alert(profile.length);
+		   		//$('#content3').html(fbggljson[0].Uid);
+				//$('#content4').html(fbggljson[0].httppath);
+				//$('#content5').html(fbggljson[0].Email);
+				//var fbimage2 = '<img src="' + fbggljson[1].httppath + '" height="20" width="20" />';
+				if (fbggljson) {	
+					 	
+			 	$('#fbpic').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+			 	$('#fbpic2').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+			 	$('#fbpic3').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+			 	$('#fbpic4').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+			 	$('#fbpic5').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+				$('#fbpic6').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+				$('#fbpic7').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+				$('#fbpic8').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+				$('#fbpic9').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+				$('#fbpic10').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+				$('#fbpic11').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+			} else 	{
+			
+			alert('hello');
+				$('#fbpic').html('<img src="img/GenPic.png" height="22" width="22" style="border-radius: 50%;" />');
+			 	$('#fbpic2').html('<img src="img/GenPic.png" height="22" width="22" style="border-radius: 50%;" />');
+			 	$('#fbpic3').html('<img src="img/GenPic.png" height="22" width="22" style="border-radius: 50%;" />');
+			 	$('#fbpic4').html('<img src="img/GenPic.png" height="22" width="22" style="border-radius: 50%;" />');
+			 	$('#fbpic5').html('<img src="img/GenPic.png" height="22" width="22" style="border-radius: 50%;" />');
+			 	$('#fbpic6').html('<img src="img/GenPic.png" height="22" width="22" style="border-radius: 50%;" />');	
+		 }}
+	});
+		$.ajax({
+		   type: "GET",
+		   url: "http://www.4yourcloud.com/hfupgradechk_ios.php",
+			dataType: "json",
+			data: { get_param: 'value' },
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: true,
+			async: "false",
+			cache: "false",
+			//data: "key="+key+"&page="+page,
+			contentType: "application/json; charset=utf-8",
+			 error: function (xhr, status) {
+            alert(status);
+        		},	
+		   success: function (acctjson){  
+		   
+		   function humanFileSize(size) {
+    		var j = Math.floor( Math.log(size) / Math.log(1024) );
+  		  	return ( size / Math.pow(1024, j) ).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][j];
+			}
+			if (acctjson[0].AccSize !== undefined) {
+		   	$('#accsize').html(humanFileSize(acctjson[0].AccSize));
+		   	}
+			$('#accemail').html(acctjson[0].Email);
+			$('#accname').html(acctjson[1].name);
+			$('#accmessage').html(acctjson[1].accountmessage);		
+		   }
+	});			
+$('body').css('font-family', 'Times New Roman, Sans Serif');
+$('header #logotopm:eq(0)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(1)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(2)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(3)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(4)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(5)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(6)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(7)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(8)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(9)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(10)').css('backgroundColor', 'DimGray');
+$('header').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(0)').css('width', '100%');
+$('header #logotop:eq(1)').css('width', '100%');
+$('header #logotop:eq(2)').css('width', '100%');
+$('header #logotop:eq(3)').css('width', '100%');
+$('header #logotop:eq(4)').css('width', '100%');
+$('header #logotop:eq(5)').css('width', '100%');
+$('header #logotop:eq(6)').css('width', '100%');
+$('header #logotop:eq(7)').css('width', '100%');
+$('header #logotop:eq(8)').css('width', '100%');
+$('header #logotop:eq(9)').css('width', '100%');
+$('header #logotop:eq(10)').css('width', '100%');
+$('header #logotop:eq(0)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(1)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(2)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(3)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(4)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(5)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(6)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(7)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(8)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(9)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(10)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(0)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(1)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(2)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(3)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(4)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(5)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(6)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(7)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(8)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(9)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(10)').css('backgroundColor', 'DarkGray');
+$('#contain .btn-block').css('color', 'whitesmoke');
+$('#contain .btn-block').css('fontWeight', 'normal');
+$('#contain .btn-block').css('width', '75%');
+$('#MainPage5 #contain #textleftbig:eq(0)').css('fontSize', '16px');
+$('#MainPage5 #contain #textleftbig:eq(1)').css('fontSize', '16px');
+$('#MainPage6 #textleftbig').css('fontSize', '16px');
+$('td a').css('fontSize', '12px');
+$('td a').css('color', '#663300');
+$('td a').css('fontWeight', 'normal');
+//$('header #logotopm').css('top', '25px');
+//$('header #yourcloudm').css('top', '25px');
+$('header').css('top', '20px');
+$('content').css('top', '10px');
+$('#MainPage').css('padding', '10px');
+$('#MainPage2').css('padding', '10px');
+$('#MainPage3').css('padding', '10px');
+$('#MainPage4').css('padding', '10px');
+$('#MainPage5').css('padding', '10px');
+$('#MainPage6').css('padding', '10px');
+$('#MainPage7').css('padding', '10px');
+$('#MainPage8').css('padding', '10px');
+$('#MainPage9').css('padding', '10px');
+$('#MainPage10').css('padding', '10px');
+$('#MainPage11').css('padding', '10px');
+$('footer').css('backgroundColor', 'DarkGray');
+//$(".content").css('top', $('header').height() + $("#logotopm").height() + $("#yourcloudm").height() + 20 + "px");
+var globebtn = jQuery('header #logotop:eq(0)');
+var globebtn2 = jQuery('header #logotop:eq(1)');
+var globebtn3 = jQuery('header #logotop:eq(2)');
+var globebtn4 = jQuery('header #logotop:eq(3)');
+var globebtn5 = jQuery('header #logotop:eq(4)');
+var globebtn6 = jQuery('header #logotop:eq(5)');
+var globebtn7 = jQuery('header #logotop:eq(6)');
+var globebtn8 = jQuery('header #logotop:eq(7)');
+var globebtn9 = jQuery('header #logotop:eq(8)');
+var globebtn10 = jQuery('header #logotop:eq(9)');
+var globebtn11 = jQuery('header #logotop:eq(10)');
+var globeimg = jQuery('#logotop img');
+    globebtn.css('padding', '3px');
+    globebtn2.css('padding', '3px');
+    globebtn3.css('padding', '3px');
+    globebtn4.css('padding', '3px');
+    globebtn5.css('padding', '3px');
+    globebtn6.css('padding', '3px');  
+    globebtn7.css('padding', '3px');
+	globebtn8.css('padding', '3px');
+	globebtn9.css('padding', '3px');
+	globebtn10.css('padding', '3px');
+	globebtn11.css('padding', '3px');
+$('#getred').css('width', '100%');	
+$('#getgreen').css('width', '100%');
+$('#page10subfolder').attr('disabled','disabled');
+		/* Log out */
+$("#add_err").css('display', 'none', 'important');
+$('#TablePage2 tr td').eq(0).css('width','7%');
+$('#TablePage2 tr td').eq(1).css('width','38%');
+$('#TablePage2 tr td').eq(2).css('width','8%');
+$('#TablePage2 tr td').eq(3).css('width','7%');
+$('#TablePage2 tr td').eq(4).css('width','19%');
+$('#TablePage2 tr td').eq(5).css('width','21%');
+$('#TablePage2 tr td').eq(0).css('word-wrap','break-word');
+$('#TablePage2 tr td').eq(1).css('word-break','break-word');
+$('#TablePage2 tr td').eq(2).css('word-wrap','break-word');
+$('#TablePage2 tr td').eq(3).css('word-wrap','break-word');
+$('#TablePage2 tr td').eq(4).css('word-wrap','break-word');
+$('#TablePage2 tr td').eq(5).css('word-wrap','break-word');
+$("#logout").click(function(){	
+		  $.ajax({
+		   type: "POST",
+		   url: "http://www.4yourcloud.com/logout_ios.php",
+		   dataType: "json",
+		   success: function (data){  
+		   //$('#content').html(data);
+		   window.location.href="index.html";
+			if(data.Email == Email)    {
+			//$("#add_err").html("right username or password");
+			 window.location.href="index.html";
+			}
+			else {
+			$("#add_err").css('display', 'inline', 'important');
+			$("#add_err").html("<div id=getred>Error logging out. Try again.</div><br>");
+			}
+		   }
+		   //beforeSend:function()
+		   //{
+			//$("#add_err").css('display', 'inline', 'important');
+			//$("#add_err").html("<img src='images/ajax-loader.gif' /> Loading...")
+		   //}
+		  });
+		return false;
+		disconnectUser();
+	});
+    /* file upload process */ 
+     $('#upload').click(function(){
+
+				var ins = document.getElementById('file').files.length;
+				var message = '';
+				var fd = new FormData();
+				var Key = $("#myKey").val();
+				var Page = $("#myPage").val();
+				var UPLOAD_URL = 'http://www.4yourcloud.com/hfuploadyc_ios.php?page=' + Page + '&key=' + Key;
+				for (var x = 0; x < ins; x++) {
+    			fd.append("file[]", document.getElementById('file').files[x]);
+				} 
+				$("#TableUpload tr").html("");
+				var head = '<tr><th><a><i class="fa fa-list" id=fath></i></a></th><th>Name<a></a></th><th>Size<a></a></th><th>Date<a></a></th></tr>';
+				$('#TableUpload thead tr:last').after(head);
+                    $.ajax({
+                      url: UPLOAD_URL,
+                      data: fd,
+                      processData: false,
+                      contentType: false,
+                      type: 'POST',
+                      success: function(datafiles){
+                        //console.log('upload success!')
+                        //$('#data').empty();
+                        //$('#data').append(datafiles);
+                      
+                        //$('#message').html(data.name);
+                        //$('#file1').html(data.warning);
+                        var upltitle = "<div id='mainleft'>Uploaded files:</div>";
+                    	$('#file1').html(upltitle);
+                    	//$('#file2').html(datafiles.length);
+                    	k = datafiles.length;
+                    	m = Math.ceil(k/2);
+                    	n = Math.round(k/2);
+                    	l = datafiles.length - 1;
+                    	//var object = JSON.parse(datafiles);
+                    	//$('#fileappend').html("");
+   						//$('#fileappend').append(object);
+                    	
+                      	for (var i = 0; i < k; i++) {
+        				//$.each(data, function(i, item) {	
+        				if (datafiles[i].filename !== undefined) {
+        						function humanFileSize(size) {
+    							var j = Math.floor( Math.log(size) / Math.log(1024) );
+  		  						return ( size / Math.pow(1024, j) ).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][j];
+								};
+			
+        		  var row = "<tr>";
+             	  var tdfolder = '<td><i class="'+ datafiles[i].Icon + '" id=fa15></td><td>';
+             	  var tdtwo = '</td><td>' + humanFileSize(datafiles[i].size) + '</td><td>' + datafiles[i].RegDate + '</td></tr>';
+             	  var iframe = '<a>' + datafiles[i].filename + '</a>';
+             	  var result1 = '';
+   				  
+   					result1 += row + tdfolder + iframe + tdtwo;
+					
+   					$('#TableUpload tr:last').after(result1);
+   					$('td a').css('fontSize', '12px');
+					$('td a').css('color', '#663300');
+					$('td a').css('fontWeight', 'normal');
+   					}
+   					}
+   					/* if( k == 1) {
+   					object = JSON.parse(datafiles);
+   					message += '<div id=getred>' + object.warning + '</div>';
+   					} */
+   					 
+   					for (var j = 0; j < k; j++) {
+   					
+   					if (datafiles[j].confirm !== undefined) {
+   					message += '<div id=getgreen>' + datafiles[j].confirm + '</div>';
+   					}
+   					if (datafiles[j].warning !== undefined) {
+					message += '<div id=getred>' + datafiles[j].warning + '</div>';
+					}
+   					}
+   					
+   					$('#message').html("");
+   					$('#message').append(message);
+   				}
+                    });
+                    
+                });
+$( function() {
+    $("#popupFolder").enhanceWithin().popup();
+});  
+ $( function() {
+    $("#popupSubFolder").enhanceWithin().popup();
+}); 
+ $( function() {
+    $("#popupSearch").enhanceWithin().popup();
+}); 
+ $( function() {
+    $("#popupShare").enhanceWithin().popup();
+});
+function downloadURL(url) {
+    var hiddenIFrameID = 'hiddenDownloader',
+        iframe = document.getElementById(hiddenIFrameID);
+    if (iframe === null) {
+        iframe = document.createElement('iframe');
+        iframe.id = hiddenIFrameID;
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+    }
+    iframe.src = url;
+};
+ /* make a folder process */   
+ $("#heyfolder").click(function(){	
+		  var folder = $("#foldercon").val();
+		  var Key = '';
+		  var Page = '';
+		  var foldermsg = '';
+		  $.ajax({
+		   type: "POST",
+		   url: 'http://www.4yourcloud.com/hfolder_ios.php?page=' + Page + '&key=' + Key,
+			data: "folder="+folder,
+			dataType: 'json',
+			xhrFields: { 
+       			withCredentials: true
+  				},
+  			crossDomain: 'true',
+			cache:'false',
+		   success: function (response){  
+		   			//$('#folderlength').html(response.length);
+                    k = response.length;
+                    /*if (response.email !== undefined) {
+                    foldermsg += '<div id=textmid>' + response.email + '</div>';
+   					}
+                    if (response.name !== undefined) {
+                    foldermsg += '<div id=textmid>' + response.name + '</div>';
+   					}
+   					if (response.text !== undefined) {
+                    foldermsg += '<div id=textmid>' + response.text + '</div>';
+   					} */
+                    if (response.warning !== undefined) {
+                    foldermsg += '<div id=getred>' + response.warning + '</div>';
+                    $('#foldermsg').html("");
+   					$('#foldermsg').append(foldermsg);
+   					}
+   					else if (response.confirm !== undefined) {
+                    foldermsg += '<div id=getgreen>' + response.confirm + '</div>';
+                    $('#foldermsg').html("");
+   					$('#foldermsg').append(foldermsg);
+   					/*$.mobile.changePage( "#page1", {
+  							transition: "pop",
+  							reverse: false,
+  							changeHash: false
+							});	*/
+					//window.location.reload();
+					window.setTimeout(function(){location.reload()},2000)
+   					}			
+   					else if (response[0].confirm !== undefined) {
+   					foldermsg += '<div id=getgreen>' + response[0].confirm + '</div>';
+   					$('#foldermsg').html("");
+   					$('#foldermsg').append(foldermsg);
+   					/*$.mobile.changePage( "#page1", {
+  							transition: "pop",
+  							reverse: false,
+  							changeHash: false
+							});		*/
+					//window.location.reload();
+					window.setTimeout(function(){location.reload()},2000)
+   					}
+   					else if (response[0].warning !== undefined) {
+					foldermsg += '<div id=getred>' + response[0].warning + '</div>';
+					$('#foldermsg').html("");
+   					$('#foldermsg').append(foldermsg);
+					} else {
+						$.mobile.changePage( "#page1", {
+  							transition: "pop",
+  							reverse: false,
+  							changeHash: false
+							});			
+							}
+   	
+   					//$('#foldermsg').html("");
+   					//$('#foldermsg').append(foldermsg);
+   					// function refreshPage(page){
+    						// Page refresh
+    					//	page.trigger('pagecreate');
+    						//page.listview('refresh');
+								//	}
+   					//refreshPage('#page1');
+   					//window.location.reload(); 
+   					//$.mobile.changePage('#page1');
+		   }
+		  });
+		return false;
+	});
+    /* make a subfolder process */ 	 
+ $("#heysubfolder").click(function(){	
+		  var subfolder = $("#subfoldercon").val();
+		  var iKey = $("#xfolder").val();
+		  var iPage = $("#xsubfolder").val();
+		  var subfoldermsg = '';
+		  $.ajax({
+		   type: "POST",
+		   url: 'http://www.4yourcloud.com/hfsubfolder_ios.php?page=' + iPage + '&key=' + iKey,
+			data: "subfolder="+subfolder,
+			dataType: 'json',
+			xhrFields: { 
+       			withCredentials: true
+  				},
+  			crossDomain: 'true',
+			cache:'false',
+		   success: function (response){  
+		   			$('#sublength').html(response.length);
+                    k = response.length;
+                    /*if (response.email !== undefined) {
+                    subfoldermsg += '<div id=textmid>' + response.email + '</div>';
+   					}
+                    if (response.name !== undefined) {
+                    subfoldermsg += '<div id=textmid>' + response.name + '</div>';
+   					}
+   					if (response.text !== undefined) {
+                    subfoldermsg += '<div id=textmid>' + response.text + '</div>';
+   					}*/
+                    if (response.warning !== undefined) {
+                    subfoldermsg += '<div id=getred>' + response.warning + '</div>';
+   					}
+   					if (response.confirm !== undefined) {
+                    subfoldermsg += '<div id=getgreen>' + response.confirm + '</div>';
+                    $('#subfoldermsg').html("");
+   					$('#subfoldermsg').append(subfoldermsg);
+   					window.setTimeout(function(){location.reload()},2000)
+   					}
+   					///for (var j = 0; j < k; j++) {
+   					
+   					if (response[0].confirm !== undefined) {
+   					subfoldermsg += '<div id=getgreen>' + response[0].confirm + '</div>';
+   					$('#subfoldermsg').html("");
+   					$('#subfoldermsg').append(subfoldermsg);
+   					window.setTimeout(function(){location.reload()},2000)
+   					}
+   					if (response[0].warning !== undefined) {
+					subfoldermsg += '<div id=getred>' + response[0].warning + '</div>';
+					}
+   					
+   					$('#subfoldermsg').html("");
+   					$('#subfoldermsg').append(subfoldermsg);
+		   }
+		  });
+		return false;
+	}); 
+    /* keyword search process */ 	
+		$("#heysearch").click(function(){	
+		  var keyword = $("#searchcon").val();
+		  var searchmsg = '';
+		  $.ajax({
+		   type: "POST",
+		   url: 'http://www.4yourcloud.com/hfsearch_ios.php',
+			data: "keyword="+keyword,
+			dataType: 'json',
+			xhrFields: { 
+       			withCredentials: true
+  				},
+  			crossDomain: 'true',
+			cache:'false',
+		   	success: function (filejson){  
+		   			//$('#searchlength').html(filejson.length);
+                    k = filejson.length;
+                    
+            $("#TablePage7 tr").html("");
+			var head = '<tr><th><a><i class="fa fa-list" id=fath></i></a></th><th>Name<a></a></th><th>Size<a></a></th><th>Date<a></a></th></tr>';
+			$('#TablePage7 thead tr:last').after(head);        
+            for (var i = 0; i < filejson.length; i++) {
+            
+        	if (filejson[i].filename !== undefined) {
+        	function humanFileSize(size) {
+    		var j = Math.floor( Math.log(size) / Math.log(1024) );
+  		  	return ( size / Math.pow(1024, j) ).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][j];
+			};
+			
+			var docs = ['pdf','PDF','psd','PSD','ai','AI','eps','EPS','ps','PS','lrf','LRF','lrx','LRX','djvu','DJVU','ibooks','IBOOKS','inf','INF','PRC','prc','mobi','MOBI','pkg','PKG','opf','OPF','doc','docx','pages','PAGES','epub','EPUB','pdb','PDB','fb2','xeb','ceb','azw3','azw','kf8','lit','oxps','OXPS','xps','XPS','xls','xlsx','DOC','DOCX','XLS','XLSX'];
+			var	images = ['png','jpe','jpeg','jpg','gif','bmp','ico','tiff','tif','svg','svgz','JPG','JPE','JPEG','GIF','PNG','BMP','TIF','TIFF','SVG','SVGZ','ICO'];
+       		var media = ['mng','MNG','avi','AVI','mov','MOV','qt','QT','WMV','wmv','mp3','MP3','MP4','mp4'];
+       		//var ext = filejson[i].filename.replace(/.*\./, '').toLowerCase();
+       		var fileName = filejson[i].filename;
+       		var ext = fileName.substr(fileName.lastIndexOf('.') + 1);
+       		
+       		if (!!(docs.indexOf(ext)+1)) {
+       		var iframe = '<a href="#page7?id=' + i + '&path=' + encodeURIComponent(filejson[i].httppath) + '" data-transition="pop" >' + filejson[i].filename + '</a>';
+       		}
+       		else if (!!(images.indexOf(ext)+1)) {
+       		var iframe = '<a href="#page8?id=' + i + '&path=' + encodeURIComponent(filejson[i].httppath) + '" data-transition="pop" >' + filejson[i].filename + '</a>';
+       		} 
+       		else if (!!(media.indexOf(ext)+1)) {
+       		var iframe = '<a href="#page8?id=' + i + '&path=' + encodeURIComponent(filejson[i].httppath) + '" data-transition="pop" >' + filejson[i].filename + '</a>';
+       		} 
+       		else {
+       		var iframe = filejson[i].filename;
+       		}
+        		  var row = "<tr>";
+             	  var tdfolder = '<td><i class="'+ filejson[i].Icon + '" id=fa15></td><td>';
+             	  var tdtwo = '</td><td>' + humanFileSize(filejson[i].size) + '</td><td>' + filejson[i].RegDate + '</td></tr>';
+             	  var result = '';
+   			
+   			result += row + tdfolder + iframe + tdtwo;
+ 			
+   			$('#TablePage7 tr:last').after(result);
+   			$('td a').css('fontSize', '12px');
+			$('td a').css('color', '#663300');
+			$('td a').css('fontWeight', 'normal');
+   			}
+            }                  
+                    if (filejson.warning !== undefined) {
+                    searchmsg += '<div id=getred>' + filejson.warning + '</div>';
+                    $('#searchmsg').html("");
+   					$('#searchmsg').append(searchmsg);
+   					}
+   					else if (filejson.confirm !== undefined) {
+                    searchmsg += '<div id=getgreen>' + filejson.confirm + '</div>';
+                    $('#searchmsg').html("");
+   					$('#searchmsg').append(searchmsg);
+   					}				
+   					else if (filejson[0].confirm !== undefined) {
+   					searchmsg += '<div id=getgreen>' + filejson[0].confirm + '</div>';
+   					$('#searchmsg').html("");
+   					$('#searchmsg').append(searchmsg);
+   					}
+   					else if (filejson[0].warning !== undefined) {
+					searchmsg += '<div id=getred>' + filejson[0].warning + '</div>';
+					$('#searchmsg').html("");
+   					$('#searchmsg').append(searchmsg);
+					} else {
+						$.mobile.changePage( "#page11", {
+  							transition: "pop",
+  							reverse: false,
+  							changeHash: false
+							});		
+							}	
+		   }
+		  });
+		return false;
+	}); 
+});
+</script>
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+<script>
+// AJAX code to check input field values when onblur event triggerd.
+function validate(field, query) {
+var xmlhttp;
+if (window.XMLHttpRequest) { // for IE7+, Firefox, Chrome, Opera, Safari
+xmlhttp = new XMLHttpRequest();
+} else { // for IE6, IE5
+xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+xmlhttp.onreadystatechange = function() {
+if (xmlhttp.readyState != 4 && xmlhttp.status == 200) {
+document.getElementById(field).innerHTML = "Validating..";
+} else if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+document.getElementById(field).innerHTML = xmlhttp.responseText;
+} else {
+document.getElementById(field).innerHTML = "Error Occurred. <a href='index.html'>Reload Or Try Again</a> the page.";
+}
+}
+xmlhttp.open("GET", "http://www.4yourcloud.com/validation.php?field=" + field + "&query=" + query, false);
+xmlhttp.send();
+}
+</script>
+<style>
+.ui-icon-directions{
+    background-image:
+    url(../icons/icons-gray/113-navigation.png);
+    height:28px;
+    width:28px;
+    background-size:28px 28px;
+    margin-left: -14px !important;
+}
+.ui-content{
+      font: Times New Roman, Sans Serif;
+      color: #663300;
+  }
+</style>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<LINK REL=STYLESHEET HREF="css/style1.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/style2.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/style3.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/style4.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/stylecloud.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/styledel.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/font-awesome.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/bootstrap-social.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/bootstrap.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/index.css" TYPE="text/css">
+</head> <body>
+<div data-role="popup" id="popupFolder" data-theme="a" class="ui-corner-all">
+  <form action="#" method="post">
+        <div style="padding:10px 20px;">
+            <h3>Create a folder:</h3>
+            <div id="folderlength"></div>
+            <div id="foldermsg"></div>  	
+            <input type="text" name="foldercon" id="foldercon" value="" placeholder="folder name..." data-theme="a">     
+            <button type="submit" id="heyfolder" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">Create</button>
+        </div>
+    </form>
+   </div> 
+<div data-role="popup" id="popupSubFolder" data-theme="a" class="ui-corner-all">
+  <form action="#" method="post">
+        <div style="padding:10px 20px;">
+            <h3>Create a subfolder:</h3> 
+            <div id="sublength"></div>
+            <div id="subfoldermsg"></div> 
+            <div id="xfoldertxt"></div> 
+            <div id="xsubfoldertxt"></div> 
+    		<input type="hidden" id="xfolder" value="" />
+    		<input type="hidden" id="xsubfolder" value="" />
+            <input type="text" name="subfoldercon" id="subfoldercon" value="" placeholder="subfolder name..." data-theme="a">
+            
+            <button type="submit" id="heysubfolder" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">Create</button>
+        </div>
+    </form>
+   </div>  
+<div data-role="popup" id="popupSearch" data-theme="a" class="ui-corner-all">
+  <form action="#page11" method="post">
+        <div style="padding:10px 20px;">
+            <h3>Type a keyword:</h3> 
+            <div id="searchlength"></div>
+            <div id="searchmsg"></div>
+            <input type="text" name="searchcon" id="searchcon" value="" placeholder="keyword..." data-theme="a">
+            <button type="submit" id="heysearch" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">Search</button>
+        </div>
+    </form>
+   </div> 
+<div data-role="popup" id="popupShare" data-theme="a" class="ui-corner-all">
+ <form action="#" method="post">
+        <div style="padding:10px 20px;">
+            <h3>Send link to:</h3> 
+            <div id="filelink"></div>
+            <div id="msglink"></div>  
+            <!--<label for="Name" class="ui-hidden-accessible">Name:</label>-->
+            <input type="text" name="namelink" id="namelink" value="" placeholder="Name" data-theme="a">
+            <!--<label for="Email" class="ui-hidden-accessible">Email:</label>-->
+            <input type="email" name="emaillink" id="emaillink" value="" placeholder="Email" data-theme="a">
+            <!--<label for="textbox" class="ui-hidden-accessible">Message:</label>-->
+            <input type="hidden" id="myfilelink" value="" />
+            <textarea id=textlink name="textlink" placeholder="Your Message Here ...." rows=5 ></textarea>
+            <button type="submit" id="heylink" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">Send Link</button>
+        </div>
+    </form>
+</div>        
+<!-- begin first page -->
+<section id="page1" data-role="page" data-cache="false">
+
+<header data-role="header" data-backbtn="false">
+
+      <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+    <!--<a><img src="/png1a/icon-10355.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-16229.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-19891.png" height="20" width="20"></a>
+		<li><a href='javascript:;'><img src="/png1a/icon-52349.png" height="20" width="20"></a></li>-->
+		<li><a><div id="fbpic"></div></a></li>
+	<!--<a><img src="/png1a/icon-39902.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-40239.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-10355.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-44419.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-44469.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-44536.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-44574.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-44588.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-44704.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-44953.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-45056.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-45177.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-31375.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-54362.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-63261.png" height="20" width="20"></a>-->
+		</ul></div>
+<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+			</div>
+</header> 
+
+  
+     
+<content class="ui-content" data-role="main">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2?id=1&path=2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage>
+
+<div id=numofFolders></div>
+<div id=content4></div>
+<div id=content5></div>
+<div id=foldermsgpage1></div>
+<table class="sortable" id="TablePage1">
+      <thead>
+        <tr>       
+          <th><a><i class="fa fa-list" id=fath></i></a></th>
+          <th>Name<a></a></th>
+          <th>Size<a></a></th>
+          <th>Date<a></a></th>        
+        </tr>
+      </thead> 
+<tbody>
+<!--<tr><td></td><td><a href="#page7" data-transition="pop"> test </a></td>
+<td></td><td></td></tr>-->
+</tbody>
+
+</table>
+
+</div>
+</content>
+<footer data-role="footer" class="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupFolder" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="flip"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#popupSearch" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav>
+</footer>
+</section>
+ <!-- end first page -->
+ <!-- begin second page -->
+<section id="page2" data-role="page" data-transition="slidefade" data-direction="reverse">
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic2"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header> 
+<content class="content" data-role="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage2>
+
+<table class="sortable" id="TablePage2">
+      <thead>
+        <tr>       
+          <th><a><i class="fa fa-list" id=fath></i></a></th>
+          <th>Name<a></a></th>
+          <th><a><i class="fa fa-download" id=fath></i></a></th>
+          <th><a><i class="fa fa-share-alt" id=fath></i></a></th>
+          <th>Size<a></a></th>
+          <th>Date<a></a></th>        
+        </tr>
+      </thead> 
+      
+<tbody>
+
+</tbody>
+
+</table>
+</div>
+</content>
+<footer data-role="footer" class="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupFolder" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="pop"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#popupSearch" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end second page -->
+<!-- begin third page -->
+<section id="page3" data-role="page">
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic3"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage3>
+<table class="table3" id="TablePage3">
+      <thead>
+        <tr>       
+          <th><a><i class="fa fa-list" id=fath></i></a></th>
+          <th>Name<a></a></th>
+          <th>Size<a></a></th>
+          <th>Date<a></a></th>        
+        </tr>
+      </thead> 
+      
+<tbody>
+
+</tbody>
+
+</table>
+
+</div>
+</content>
+<footer data-role="footer" class="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupFolder" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="flip"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#popupSearch" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end third page -->
+<!-- begin fourth page -->
+<section id="page4" data-role="page">
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic4"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage4>
+<table class="sortable" id="TablePage4">
+      <thead>
+        <tr>       
+          <th><a><i class="fa fa-list" id=fath></i></a></th>
+          <th>Name<a></a></th>
+          <th>Size<a></a></th>
+          <th>Date<a></a></th>        
+        </tr>
+      </thead> 
+      
+<tbody>
+
+
+</tbody>
+
+</table>
+</div>
+</content>
+
+<footer data-role="footer" class="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupFolder" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="pop"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#popupSearch" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li>
+</ul></nav></footer>
+</section>
+<!-- end fourth page -->
+<!-- begin fifth page -->
+<section id="page5" data-role="page">
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic5"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage5>
+<div id=contain>
+<div id=textleftbig>Account Size</div></div>
+<div id=contain>
+<div id=mainleft>Name:</div>
+<div id=mainright><div id="accname"></div></div></div>
+<div id=contain>
+<div id=mainleft>Email Address:</div>
+<div id=mainright><div id="accemail"></div></div></div>
+<div id=contain>
+<div id=mainleft>Total Size:</div>
+<div id=mainright><div id="accsize"></div></div></div>
+<div id=contain>
+<div id=textleftbig>Upgrade Status</div></div>
+<div id=contain>
+<div id=mainleft>Account Status:</div>
+<div id=mainright><div id="accmessage"></div></div></div>
+<div id=contain>
+<form action="#" method="post" id="login-form">
+<div class="err" id="add_err"></div>
+<button type="submit" id="logout" name="logout" value="Logout" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">Logout</button>
+<!--<input type="submit" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left" id="logout" name="logout" value="Logout">-->
+</form></div>
+<img id="foto1" width="100%" height=auto >
+</div>
+</content>
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupFolder" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="flip"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#popupSearch" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end fifth page -->
+<!-- begin sixth page -->
+
+<section id="page6" data-role="page">
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic6"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage6>
+<div class="err" id="add_err"></div>
+
+<div id=textleftbig>Select Files/Folder To Upload:</div>
+<div id=containm></div>
+<div id=contain>
+<div id="message"></div></div>
+<div id=contain>
+<form method="post" enctype="multipart/form-data" >
+            <input type="file" name="file[]" id="file" size="20" multiple/>
+            <input type="hidden" id="myKey" value="" />
+            <input type="hidden" id="myPage" value="" />
+            <br /><br />
+            <button type="button" id="upload" value="upload" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">Upload</button>
+            <!--<input type="button" id="upload" value="upload" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">-->
+            <!--<button type="submit" id="upload" name="upload" class="ui-btn ui-corner-all ui-shadow ui-btn-b ui-btn-icon-left">Upload</button>-->
+        </form>
+    <div id="output"></div>
+    <div id="file1"></div>
+    <div id="myKeyText"></div>
+    <div id="myPageText"></div>
+    
+<table class="sortable" id="TableUpload">
+      <thead>
+      <tr></tr>
+      </thead> 
+      
+<tbody>
+
+
+</tbody>
+
+</table>
+<!--<form action="#" enctype="multipart/form-data" >
+    <input type="file" name="file" />
+    <input type="submit" value="Upload" />
+</form>
+    <div id="response"></div>
+    <ul id="image-list">
+ 
+    </ul>
+<form id="fileupload" enctype="multipart/form-data" method="post" name="fileupload" >
+        
+        <input type="file" name="file" id="file" required />
+        <input type="submit" value="Upload" id="upload"/>
+    </form>
+<progress></progress> 
+<div id="output"></div>-->
+</div></div>
+</content>
+
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupFolder" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="pop"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#popupSearch" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end sixth page -->
+<!-- begin 7th page -->
+<section id="page7" data-role="page">
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic7"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage7>
+<div id="id7display"></div>
+<img id="path7display" width="100%" height="400px" >
+<!--<object id="path7display" type="text/plain" width="100%" height="250px"></object>-->
+<div id="http7display"></div>
+<div id="httpLink"></div>
+<div id="numofBooks"></div>
+</div>
+</content>
+
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupFolder" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="flip"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#popupSearch" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end 7th page -->
+<!-- begin 8th page -->
+<section id="page8" data-role="page">
+
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic8"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>							
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage8>
+<div class="err" id="add_err"></div>
+
+<div id="id9display"></div>
+<img id="path9display" width="100%" height=auto >
+<div id="http9display"></div>
+<img id="fotocontent1" width="100%" height=auto >
+<img id="fotocontent2" width="100%" height=auto >
+<img id="fotocontent3" width="100%" height=auto >
+<div id="numOfFotos"></div>
+<div id="httpFotoLink"></div>
+<div id="httpFotoNum"></div>
+</div>
+</content>
+
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupFolder" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="pop"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#popupSearch" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end 8th page -->
+<!-- begin 9th page -->
+<section id="page9" data-role="page">
+
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic9"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>							
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage9>
+<div class="err" id="add_err"></div>
+
+<!--<div id="folder9display"></div>
+<div id="id29display"></div>-->
+<table class="sortable" id="TablePage5">
+      <thead>
+        <tr>       
+          <th><a><i class="fa fa-list" id=fath></i></a></th>
+          <th>Name<a></a></th>
+          <th>Size<a></a></th>
+          <th>Date<a></a></th>        
+        </tr>
+      </thead> 
+      
+<tbody>
+
+
+</tbody>
+
+</table>
+</div>
+</content>
+
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupSubFolder" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Subfolder</i></a></li>
+<li><a href="#page6" data-transition="pop"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#popupSearch" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end 9th page -->
+<!-- begin 10th page -->
+<section id="page10" data-role="page">
+
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic10"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>							
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage10>
+<div class="err" id="add_err"></div>
+
+<!--<div id="folder10display"></div>
+<div id="subfolder10display"></div>
+<div id="id10display"></div>-->
+<table class="sortable" id="TablePage6">
+      <thead>
+        <tr>       
+          <th><a><i class="fa fa-list" id=fath></i></a></th>
+          <th>Name<a></a></th>
+          <th>Size<a></a></th>
+          <th>Date<a></a></th>        
+        </tr>
+      </thead> 
+      
+<tbody>
+
+
+</tbody>
+
+</table>
+</div>
+</content>
+
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="" id="" data-rel="popup" data-position-to="window" class="ui-disabled" data-transition="pop" data-role="disabled"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Subfolder</i></a></li>
+<li><a href="#page6" data-transition="pop"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#popupSearch" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end 10th page -->
+<!-- begin 11th page -->
+<section id="page11" data-role="page">
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic11"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>							
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage11>
+
+<table class="sortable" id="TablePage7">
+      <thead>
+        <tr>       
+          <th><a><i class="fa fa-list" id=fath></i></a></th>
+          <th>Name<a></a></th>
+          <th>Size<a></a></th>
+          <th>Date<a></a></th>        
+        </tr>
+      </thead> 
+      
+<tbody>
+
+
+</tbody>
+
+</table>
+</div>
+</content>
+
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#popupSubFolder" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Subfolder</i></a></li>
+<li><a href="#page6" data-transition="pop"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#popupSearch" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-a" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end 11th page -->
+<script>
+function disconnectUser() {
+    var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' + accessToken;
+
+    // Perform an asynchronous GET request.
+    $.ajax({
+        type: 'GET',
+        url: revokeUrl,
+        async: false,
+        contentType: "application/json",
+        dataType: 'jsonp',
+        success: function(nullResponse) {
+            // Do something now that user is disconnected
+            // The response is always undefined.
+            accessToken = null;
+            console.log(JSON.stringify(nullResponse));
+            console.log("-----signed out..!!----" + accessToken);
+        },
+        error: function(e) {
+            // Handle the error
+            // console.log(e);
+            // You could point users to manually disconnect if unsuccessful
+            // https://plus.google.com/apps
+        }
+    });
+}
+</script>
+</body>
+</html>

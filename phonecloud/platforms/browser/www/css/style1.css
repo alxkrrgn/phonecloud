@@ -1,0 +1,157 @@
+/*body { color: WhiteSmoke; width : 100%; font-weight: standard; font-size: small; font-family: tahoma, sans-serif;
+background:snow 100% 100%;height:100%;margin: 0px; padding: 0px; text-align: center;min-width: 100%;max-width:100%;
+overflow-y:auto;overflow-x:hidden;
+}*/
+body { color: WhiteSmoke; width : 100%; font-weight: standard; font-size: small; font-family: times new roman, serif;
+background:snow 100% 100%;height:100%;margin: 0px; padding: 0px; text-align: center;min-width: 100%;max-width:100%;
+overflow-y:auto;overflow-x:hidden;
+} 
+#bodycolor { background:snow 100% 100% ;width:100%;overflow-x:hidden;
+}
+#bodyWS { background:WhiteSmoke 100% 100%;width:100%;
+}
+#bodyGrayTiles { background: url(background-1215195_1920.jpg) repeat 100% 100%; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: contain;
+}
+profile { color: #000066; width : auto; font-weight: standard; font-size: small; font-family: tahoma, sans-serif;
+background:  #483D8B fixed 100% 100% repeat;
+}
+.textbody{ color: navy; width : 800; font-weight: standard; 
+}
+.headermenu { border-color:navy; text-align: center;
+}
+.headerid { line-height: 20px; text-align: center;
+}
+.boldturq { color: Turquoise; font-size: 10; font-weight: bold;
+}
+.boldrblue { color: #4169E1; font-size: 20; font-weight: bold;
+}
+.login {color:navy; font-weight: bold; text-align: left;
+}
+#cloudnine { float:left;width: 400px; background: none repeat-x bottom; color:#000033; text-align: center;
+margin-left:0px;font-size: 65px; line-height:65px;font-weight:900; font-style: normal;font-family: lucida, sans-serif;letter-spacing: -7px;
+border:none;margin-top:5px;white-space:pre;
+}
+#pagemile {background: none;color:#000066;font-size: 24px; font-weight:900; font-style: normal;
+font-family: lucida, sans-serif;letter-spacing: -1px;
+}
+.cyanbg {background-color:#fcfcfc transparent; font-weight: bold; font-family: times new roman, serif; color: #000033; 
+font-size: large; text-decoration: none;padding: 10px;margin-top:10px;
+}
+.cyanbgn {background: url(pushreg.gif)	#F8F8FF; font-weight: 900; font-family: times new roman, serif; 
+color: #191970; font-size: x-large;text-decoration: none;text-align:center;vertical_align: middle;
+}
+.border {border-right-width: 1; border-color: blue; border-bottom-width: 2;
+}
+.nounderline {text-decoration: none;
+}
+.warng {float:left;background: maroon; font-weight: bold;padding: 10px; font-family: times new roman, serif; 
+ font-size: medium; text-decoration: none;border:3px solid indianred;width:100%;margin:0;clear:both; color: WhiteSmoke;
+}
+.confirmg {float:left;background: darkblue; font-weight: bold;padding: 10px; font-family: times new roman, serif; 
+ font-size: medium; text-decoration: none;border:3px solid aqua;width:90%;margin:5px 5px 5px;clear:both;color: WhiteSmoke;
+}
+.warn {background: maroon; font-weight: bold;padding: 10px; font-family: times new roman, serif; color: WhiteSmoke;
+ font-size: 20px; text-decoration: none;border:3px solid indianred;margin:0;border-radius: 25px;
+}
+.warnm {background: maroon; font-weight: bold;padding: 20px; font-family: times new roman, serif; 
+ font-size: medium;border:3px solid indianred;margin:5px 0 5px 0;
+}
+.warning {background: maroon; font-weight: bold;padding: 10px; font-family: times new roman, serif; 
+font-size: medium; text-decoration: none;margin-top:30px;border:3px solid indianred;margin:5px 0 5px 0;
+}
+.confirm {background: darkblue; font-weight: bold;padding: 10px; font-family: times new roman, serif; color: WhiteSmoke;
+font-size: 20px; text-decoration: none;border:3px solid aqua;margin:0;border-radius: 25px;
+}
+.upload {background: darkblue; font-weight: bold;padding: 10px; font-family: times new roman, serif; color: WhiteSmoke;
+font-size: 20px; text-decoration: none;border:3px solid aqua;margin:0;border-radius: 0;
+}
+#navl { float: left;padding: 10px; width: 200px; positon: relative; left: 20px; border: 1px solid gray;
+height: 150px; background-color: #FFFAFA;
+}
+#navr { float: right;padding: 10px; width: 200px; positon: absolute; right: 20px; border: 1px solid gray;
+height: 150px; background-color: #FFFAFA;
+}
+#right {padding: 10px; text-align: right; width: 150px; position: absolute; right: 20px;
+}
+#boxright {float:right; padding: 0px; text-align: right; width: auto; position: relative; right: 0px;top: 5px;
+}
+#register {clear:both; padding-top: 2px;
+}
+#edit {clear:both; margin-top: 2px;
+}
+#text {float:left; margin-left:20px; width: 200px; text-align:right; color:#393939; font-weight: bold;white-space:pre
+}
+#wtext {float:left; margin-left:20px; width: 200px; text-align:right; color:#FAFAFF; font-weight: bold;white-space:pre
+}
+#notext {float:left; margin-left:20px; width: 200px; text-align:right; color:lightslategray; font-weight: bold;
+}
+#field {float:left; margin-left:20px; width: 475px; text-align:left;
+}
+#mytext {float:left; margin:0; width: 120px; text-align:right; color:navy; font-weight: bold;white-space:pre
+}
+#myfield {float:left; width: 570px; margin-left:20px;text-align:left;color:#393939;
+}
+#utext {float:left; margin:0; width: 90px; text-align:right;font-weight: bold;color:darkslategray;border:none;white-space:pre
+}
+#ufield {float:left; width: 250px; margin-left:20px;text-align:left;font-weight: normal;border:none;color:#000066
+}
+#field1 {position:relative; left:220px; width: 150px; text-align:left;
+}
+#left {float: left;top: 0px;left: 0px;padding: 2px;width: 120px;background:#fff;border: 1px solid gray;
+height: 400px;
+}
+#center {position:relative;top: 0;left: 5px;padding: 5px;width: 650px;height: 400px;background: #F8F8FF;
+border: 1px solid gray;
+}
+.top {margin: 0px 0px 0px 0px;	padding: 0px;	height: auto;
+}
+.bottom {float: bottom;margin-left:auto;margin-right:auto;padding: 0px;width: auto;height:65px;background: #fff;
+border: 1px solid gray;
+}
+#topleft {position: absolute;left: 10px;top: 25px;margin-left: 213px;width: 175px;background: #fff;
+border: 1px solid #009;
+}
+#inputtext {BORDER-RIGHT: #bdc7d8 1px solid; PADDING-RIGHT: 3px; BORDER-TOP: #bdc7d8 1px solid;text-align: center;
+PADDING-LEFT: 3px; FONT-SIZE: 20px; PADDING-BOTTOM: 3px; BORDER-LEFT: #bdc7d8 1px solid; PADDING-TOP: 3px;
+ BORDER-BOTTOM: #bdc7d8 1px solid; FONT-FAMILY: "lucida grande", tahoma, verdana, arial, sans-serif;font-weight:bold;
+}
+#inputsubmit {BORDER-RIGHT: #0e1f5b 1px solid; BORDER-TOP: #d9dfea 1px solid;font-weight:bold;padding:5px;
+ BORDER-LEFT: #d9dfea 1px solid; Color: WhiteSmoke; BORDER-BOTTOM: #0e1f5b 1px solid; text-align: center;
+FONT-FAMILY: tahoma, sans-serif; BACKGROUND-COLOR: #3b5998;FONT-SIZE: 15px;
+}
+#fath { font-size:18px; color:snow; }
+#fatd { font-size:18px; }
+#fa15 { font-size:15px; }  #fa12 { font-size:12px; }  #fa20 { font-size:20px; } #fa18 { font-size:18px; } 
+#pad510 {padding:5px 5px 5px 10px}
+#pad5  {padding:5px}
+#pad10 {padding:10px}
+#pad15 {padding:15px}
+#pad20 {padding:10px}
+#pad25 {padding:25px 0  25px 0}
+#mgn10 {margin:0 10px 0}
+#mgn15 {margin:0 15px 0}
+#mgn20 {margin:0 20px 0}
+#mgn25 {margin:25px 0  25px 0}
+#mgn5  {margin:0 5px 0}
+#mgnall5 {margin:5px}
+#mgnall10 {margin:10px}
+#copy { color:black 
+}
+a.linkopacity img {filter:alpha(opacity=85);-moz-opacity: 0.85; opacity: 0.85;-khtml-opacity: 0.85;
+}
+a.linkopacity:hover img {filter:alpha(opacity=100); -moz-opacity: 1.0; opacity: 1.0;-khtml-opacity: 1.0;
+}
+a.linkopacity65 img {filter:alpha(opacity=65);-moz-opacity: 0.65; opacity: 0.65;-khtml-opacity: 0.65;
+}
+a.linkopacity65:hover img {filter:alpha(opacity=100); -moz-opacity: 1.0; opacity: 1.0;-khtml-opacity: 1.0;
+}
+a.linkopacity75 img {filter:alpha(opacity=75);-moz-opacity: 0.75; opacity: 0.75;-khtml-opacity: 0.75;
+}
+a.linkopacity75:hover img {filter:alpha(opacity=100); -moz-opacity: 1.0; opacity: 1.0;-khtml-opacity: 1.0;
+}
+.blur { color: transparent; text-shadow: 0 0 5px rgba(0,0,0,0.5);
+}

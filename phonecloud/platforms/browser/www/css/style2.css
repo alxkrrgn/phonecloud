@@ -1,0 +1,112 @@
+#header {float: left; width: 771px;background: url(bg.gif) #DAE0D2 repeat-x 50% bottom; font-size:93%;
+line-height:normal;margin-left: auto;margin-right: auto;
+}
+#header ul { margin:0;padding:10px 10px 0;list-style:none;
+}
+#header li { float:left;background: url(normleft.gif) no-repeat left top;margin:0;padding:0 0 0 9px;display: inline;
+}
+#header a {float:left;display:block;background: url(normright.jpg) no-repeat right top;padding:5px 15px 4px 6px;
+text-decoration:none;font-weight:bold;color:#765;/* Commented Backslash Hack hides rule from IE5-Mac \*/
+ /* End IE5-Mac hack */
+}
+#header a {float:none;
+}
+#header a:hover {float:left;display:block;background:url(normright.jpg) no-repeat right top;padding:5px 15px 4px 6px
+;text-decoration:none;font-weight:bold;color:navy;
+}
+#header #current {background-image: url(normlefton.gif);
+}
+#header #current a {background-image: url(normrighton.gif); padding-bottom: 5px;color: black;
+}
+#navlist {width:450px;text-align:justify;padding-left: 0;list-style-type: none;
+}
+#navlist ul {padding: 0;margin-left: 0;border: 1px solid #999;width: 150px;text-align: center;
+}
+#navlist a {diplay: block;font-weight:bold;
+}
+#navlist li {margin: 0;width: 100px;padding: 5px;display: inline;
+}
+#navlist li a {text-decoration: none;color: #2F4F4F;text-align: center;
+}
+#navlist li a:hover {color: white;background-color: #765;font-weight: bold;
+}
+#navfx {float:left;margin:0;padding-left: 0;list-style-type: none;border-bottom: 1px solid silver;
+border-top:none;border-left:none;width:751px;background:lightslategray transparent;line-height:20px
+}
+#navfx ul {padding-left: 0;margin-left: 0;text-align: center;overflow: auto;
+}
+#navfx a {diplay: block;font-weight: bold;font-size:16px;
+}
+#navfx li {margin: 0;padding:0px 5px 0px;background:#333333;border-left: none;
+border-right: 1px solid #F8F8FF transparent;text-indent: 0px;line-height: 20px;width: auto;overflow: hidden;
+display: inline;border-top:none
+}
+#navfx li a {text-decoration: none;color: lightgrey;
+}
+#navfx li a:hover {color: black;text-decoration: none;
+}
+#navfx li:hover {background: silver;
+}
+#navfx #current {background: silver;color:black;padding-bottom: 0px;
+}
+#navfx #current a {color:black;
+}
+.headerv1 { line-height: 20px; text-align: center;
+}
+#navb {padding-left: 0;list-style-type: none;border-top: none;border-bottm: none;
+width:auto;margin:0;padding:0;
+}
+#navb ul {padding-left: 0;margin-left: 0;text-align: center;overflow: auto;
+}
+#navb a {diplay: block;font-weight: bold;
+}
+#navb li {margin: 0;padding:5px 10px 5px;background-color: none;border-top: none;border-left: none;
+border-left: none;text-indent: 0px;line-height: auto;width: auto;display: inline;
+}
+#navb li a {text-decoration: none;color: #F5F5F5;
+}
+#navb li a:hover {color: #ffcc5c;text-decoration: underline;
+}
+#navb li:hover {text-decoration: none;
+}
+#navxold {margin:0;padding-left: 0;list-style-type: none;border-top: none;border-bottm: none;
+width:auto;background: url(downbglight.gif) bottom;z-index: auto;bottom: 0px;
+}
+#navx {margin:0;padding-left: 0;list-style-type: none;border-top: none;border-bottm: none;
+width:auto;background: none;z-index: auto;bottom: 0px;
+}
+#navx ul {padding-left: 0;margin-left: 0;text-align: left;overflow: auto;width:100%;
+}
+#navx a {diplay: block;font-weight: normal;padding-left:2%;font-size:15px;
+}
+#navx li {margin: 0;padding:0px;border-top: none;border-left: none;
+border-right:none;vertical-align:center;line-height: auto;width: 100%;overflow: hidden;display: block;
+}
+#navx li a {text-decoration: none;color: none;line-height: 20px;
+}
+#navx li a:hover {color: Black;text-decoration: none;
+}
+#navx li:hover {background: none;line-height: 20px;
+}
+#navx #current {background:  none ;border-left: none;border-right: none;
+padding:0;
+}
+#navbx {float:left;margin: 0;padding-left: 0;background: url(bgblue.gif) #DAE0D2 repeat-x 50% bottom;
+list-style-type: none;border-bottom: none;border-top: 1px solid black;border-right: none;width: 900px;
+}
+#navbx ul {padding-left: 0;margin-left: 0;text-align: left;overflow: auto;
+}
+#navbx a {diplay: block;white-space: pre;font-weight: bold;font-size: small;color: #2F4F4F;
+}
+#navbx li {margin: 0px;padding:0;background: none;border-bottom: none;border-left: 1px solid black;
+border-right: none;border-top: none;vertical-align: top;line-height: auto;width: 150px;overflow: visible;
+display: inline;
+}
+#navbx li a {text-decoration: none;color: #2F4F4F;width: 100px;
+}
+#navbx li a:hover {border-right: none;text-decoration: none;color: #F8F8F8;
+}
+#navbx li:hover {background: url(bg191970.gif) #DAE0D2 repeat-x bottom;border-right: none;
+}
+#navbx #current {background-color: #f8f8ff;padding-bottom: 0px;color: #000066;
+}

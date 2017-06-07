@@ -1,0 +1,1161 @@
+<!DOCTYPE html> <html>
+<head>
+<title>YourCloud</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1,
+maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'; media-src *; img-src * filesystem: data:">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+<script src="cordova.js" type="text/javascript" charset="utf-8"></script> 
+<script type="text/javascript" src="js/jquery.mobile.paramsHandler-1.4.3.js"></script>
+<script type="text/javascript" src="js/example.js"></script>
+<script src="js/jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.modal.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="css/jquery.modal.min.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="css/jquery.modal.css" type="text/css" media="screen" />
+<script>
+$(document).ready(function(){
+ $(window).load(function() { 
+     	$('td a').css('fontSize', '12px');
+		$('td a').css('color', '#663300');
+		$('td a').css('fontWeight', 'normal');
+  });
+var fotoarray = [];
+var k = 0;
+var iNumfoto;
+function getHttpPath(abc) {
+			document.getElementById("fotocontent").src = array[abc];
+		  	document.getElementById("httpFotoLink").innerHTML = 'HTTPPATH: ' + array[abc];
+		  	document.getElementById("httpFotoNum").innerHTML = 'Photo Number: ' + abc;
+		  	document.getElementById("foto1").src = array[abc];
+		  	}
+$('#MainPage4 table tr > td:nth-child(2)').click(function(){
+//$('#MainPage4 table tr > td:nth-child(2)').on('click','.runMyFunction', function() {
+ alert("function is running");
+ var fileid = $(this).val();
+ //alert(fileid);
+   $.ajax({
+		   type: "POST",
+		   url: "http://www.4yourcloud.com/hfpid_ios.php",
+			data: "pid="+fileid,
+			dataType: 'json',
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: 'true',
+			cache:"false",
+		   success: function (data){  
+		   $('#contentid').html(data.Email);
+			if (data.filename == fileid)  {
+			//$("#add_err").html("right username or password");
+			document.getElementById("fotocontent").src = data.httppath;
+			window.location.href="#page8";
+			}
+			else {
+			$("#add_err").css('display', 'inline', 'important');
+			$("#add_err").html("<div id=getred>filename wrong or not existing</div><br>");
+			}
+		   }
+		  });
+ });
+ $('#MainPage5 #contain #mainright').click(function(){
+ alert("function is running");
+ var fileid = $(this).val();
+ alert(fileid);
+ });
+  $.ajax({
+		   type: "GET",
+		   url: "http://www.4yourcloud.com/home_ios.php",
+			dataType: "json",
+			data: { get_param: 'value' },
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: true,
+			async: "false",
+			cache: "false",
+			//data: "key="+key+"&page="+page,
+			contentType: "application/json; charset=utf-8",
+			 error: function (xhr, status) {
+            alert(status);
+        		},	
+		   success: function (datajson){  
+		
+		   	$('#content').html('<b>it is working</b>');
+			//$('#content1').append(html(datajson[0].foldername));
+			//$('#content1').append(html(datajson[1].foldepath));
+			$('#content1').html(datajson[2].foldername);
+			$('#content2').html(datajson[1].foldername);
+			$('#content').html(datajson[0].foldername);
+			//alert(datajson.length);
+		     //var row;
+		     //var tdfolder;
+		     //var tdtwo;
+
+        	for (var i = 0; i < datajson.length; i++) {
+        	
+        		  var row = "<tr>";
+             	  var tdfolder = '<td><img src="img/folder.png" height="15" width="18"></td><td>';
+             	  var tdtwo = '</td><td></td><td></td></tr>';
+             	  var result = '';
+   			
+   			//alert(row);
+   			result += row + tdfolder;
+   			//alert(result);
+			result += datajson[i].foldername;
+			//alert(result);
+			result += tdtwo; 
+			//alert(result);
+   			//result.append(row + tdfolder + html(datajson[i].foldername) + tdtwo);
+   			$('#bodypage3').append(result);
+   			$('#TablePage2 tr:last').after(result);
+   			$('#TablePage3 tr:last').after(result);
+   			$('#TablePage4 tr:last').after(result);
+   			$('#TablePage1 tr:last').after(result);
+   			//result.append(row + tdfolder + html(datajson[i].folderpath) + tdtwo);
+   			//console.log(result);
+   			// result += row + tdfolder + tdtwo; 
+   
+            //tr.append("<td>" + html(datajson[i].folderpath) + "</td>");
+            //tr.append("<td>" + html(datajson[i].Uid) + "</td>");
+           
+            //$('#content3').html(result);
+            }
+            if (datajson=='correct') {
+            $('#content').html('<b>Link is working</b>');
+            }
+            //var id = data[0];              //get id
+        	//var vname = data[1];           //get name
+            //$('#output').html("<b>id: </b>"+id+"<b> name: </b>"+vname); //Set output element html
+            
+   			// var htmlStr = '';
+    		//$.each(results, function(k, v){
+        			//htmlStr += v[k] + ' ' + '<br />';
+   				//});
+   		   //$("#page").html(htmlStr);
+   		   //var obj = JSON.parse(results);
+			//jQuery.each(obj, function(i, obj) {
+  			//$("#page").html(obj.id + " " + obj.name);
+			//});
+		   //var arrFolder = $.parseJSON(results);
+			//$("#page1").html(arrFolder);
+		   }
+	});	
+		  $.ajax({
+		   type: "GET",
+		   url: "http://www.4yourcloud.com/hfile_ios.php",
+			dataType: "json",
+			data: { get_param: 'value' },
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: true,
+			async: "false",
+			cache: "false",
+			//data: "key="+key+"&page="+page,
+			contentType: "application/json; charset=utf-8",
+			 error: function (xhr, status) {
+            alert(status);
+        		},	
+		   success: function (filejson){  
+		   	//$('#content').html('<b>it is working</b>');
+			//$('#content1').append(html(datajson[0].foldername));
+			//$('#content1').append(html(datajson[1].foldepath));
+			//alert(datajson.length);
+		     //var row;
+		     //var tdfolder;
+		     //var tdtwo;
+
+        	for (var i = 0; i < filejson.length; i++) {
+        	
+        	function humanFileSize(size) {
+    		var j = Math.floor( Math.log(size) / Math.log(1024) );
+  		  	return ( size / Math.pow(1024, j) ).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][j];
+			};
+        		  var row = "<tr>";
+             	  var tdfolder = '<td><i class="'+ filejson[i].Icon + '" id=fa15></td><td>';
+             	  var tdtwo = '</td><td>' + humanFileSize(filejson[i].size) + '</td><td>' + filejson[i].RegDate + '</td></tr>';
+             	  var result = '';
+   			
+   			//alert(row);
+   			result += row + tdfolder + filejson[i].filename + tdtwo;
+			//alert(result);
+   			//result.append(row + tdfolder + html(datajson[i].foldername) + tdtwo);
+   			$('#bodypage3').append(result);
+   			$('#TablePage2 tr:last').after(result);
+   			$('#TablePage1 tr:last').after(result);
+   			//$('#TablePage3 tr:last').after(result);
+   			//result.append(row + tdfolder + html(datajson[i].folderpath) + tdtwo);
+   			//console.log(result);
+   			// result += row + tdfolder + tdtwo; 
+   
+            //tr.append("<td>" + html(datajson[i].folderpath) + "</td>");
+            //tr.append("<td>" + html(datajson[i].Uid) + "</td>");
+           
+            //$('#content3').html(result);
+            }
+            //var id = data[0];              //get id
+        	//var vname = data[1];           //get name
+            //$('#output').html("<b>id: </b>"+id+"<b> name: </b>"+vname); //Set output element html
+            
+   			// var htmlStr = '';
+    		//$.each(results, function(k, v){
+        			//htmlStr += v[k] + ' ' + '<br />';
+   				//});
+   		   //$("#page").html(htmlStr);
+   		   //var obj = JSON.parse(results);
+			//jQuery.each(obj, function(i, obj) {
+  			//$("#page").html(obj.id + " " + obj.name);
+			//});
+		   //var arrFolder = $.parseJSON(results);
+			//$("#page1").html(arrFolder);
+		   }
+	});	
+	$.ajax({
+		   type: "GET",
+		   url: "http://www.4yourcloud.com/hfbooks_ios.php",
+			dataType: "json",
+			data: { get_param: 'value' },
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: true,
+			async: "false",
+			cache: "false",
+			//data: "key="+key+"&page="+page,
+			contentType: "application/json; charset=utf-8",
+			 error: function (xhr, status) {
+            alert(status);
+        		},	
+		   success: function (bookjson){  
+        	for (var i = 0; i < bookjson.length; i++) {
+        	var bookarray = [];
+        	var y = 0;
+        	function humanFileSize(size) {
+    		var j = Math.floor( Math.log(size) / Math.log(1024) );
+  		  	return ( size / Math.pow(1024, j) ).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][j];
+			};
+			//document.getElementById("filecontent").data = bookjson[i].httppath;
+        		  var row = "<tr>";
+             	  var tdfolder = '<td><i class="'+ bookjson[i].Icon + '" id=fa15></td><td>';
+             	  var tdtwo = '</td><td>' + humanFileSize(bookjson[i].size) + '</td><td>' + bookjson[i].RegDate + '</td></tr>';
+             	  var iframebook = '<a href="#page7?id=' + i + '&path=' + encodeURIComponent(bookjson[i].httppath) + '" data-transition="pop" >' + bookjson[i].filename + '</a>';
+             	  var result1 = '';
+   				  bookarray.push(bookjson[i].httppath);
+   					
+   			result1 += row + tdfolder + iframebook + tdtwo;
+   			//y = Math.floor((Math.random() * i) + 1);
+		  	//document.getElementById("filecontent").src = bookarray[y];
+		  	//document.getElementById("numofBooks").innerHTML = 'Number of Books: ' + i;
+		  	//document.getElementById("httpLink").innerHTML = 'httplink: ' + bookjson[i].httppath;
+			//alert(result);
+   			//result.append(row + tdfolder + html(datajson[i].foldername) + tdtwo);
+   			$('#bodypage3').append(result1);
+   			$('#TablePage3 tr:last').after(result1);
+            }
+		   }
+	});	
+		$.ajax({
+		   type: "GET",
+		   url: "http://www.4yourcloud.com/hfotos_ios.php",
+			dataType: "json",
+			data: { get_param: 'value' },
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: true,
+			async: "false",
+			cache: "false",
+			//data: "key="+key+"&page="+page,
+			contentType: "application/json; charset=utf-8",
+			 error: function (xhr, status) {
+            alert(status);
+        		},	
+		success: function (fotojson){  
+		    var array = [];
+        	var x = 0;
+        	iNumfoto = fotojson;
+        	//alert ("Number of Photos: " + iNumfoto.length);		
+				for (var l = 0; l < iNumfoto.length; l++) {
+            	var fotoid = 'fotoLink' + l;
+            	var fotocontent = 'fotocontent' + l;
+				$("#" + fotoid).trigger(function(){
+                x = l;
+		  		document.getElementById(fotocontent).src = array[l];
+		  		//document.getElementById("httpFotoLink").innerHTML = 'HTTPPATH: ' + array(0);
+		  		//document.getElementById("httpFotoNum").innerHTML = 'Photo Number: ' + 0;
+		  		//document.getElementById("foto1").src = array[0];
+            	});
+            	}
+            //alert ("fotoid: " + fotoid);
+        	for (var i = 0; i < fotojson.length; i++) {
+        	
+        	function humanFileSize(size) {
+    		var j = Math.floor( Math.log(size) / Math.log(1024) );
+  		  	return ( size / Math.pow(1024, j) ).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][j];
+			};
+			
+			array.push(fotojson[i].httppath);
+            fotoarray.push(fotojson[i].httppath);
+            	
+			//document.getElementById("fotocontent").src = fotojson[i].httppath;
+        		  var row = "<tr>";
+             	  var tdfolder = '<td><i class="'+ fotojson[i].Icon + '" id=fa15></td><td>';
+             	  var tdtwo = '</td><td>' + humanFileSize(fotojson[i].size) + '</td><td>' + fotojson[i].RegDate + '</td></tr>';
+             	  //var iframefoto = '<a href="#" class="runMyFunction" class="ui-shadow ui-btn ui-corner-all ui-btn-inline" data-transition="flip">' + fotojson[i].filename + '</a>';
+             	  var iframefoto = '<a href="#page8?id=' + i + '&path=' + encodeURIComponent(fotojson[i].httppath) + '" data-transition="pop" >' + fotojson[i].filename + '</a>';
+             	  //var iframefoto = '<div id="fileid">' + fotojson[i].filename + '</div>';
+             	  //var iframefoto = fotojson[i].filename;
+             	  var result2 = '';
+           	  
+   			result2 += row + tdfolder + iframefoto + tdtwo;
+   			
+			/*function printarray() {
+		  		x = i;
+		  		document.getElementById("fotocontent").src = array[x];
+		  		window.location.href="home.html#page8";
+						};*/
+			//alert(result);
+   			//result.append(row + tdfolder + html(datajson[i].foldername) + tdtwo);
+   			//$('#bodypage3').append(result2);
+   			//iframefoto.click(myFunction);
+   			
+   			//x = Math.floor((Math.random() * i) + 1);
+		  	//document.getElementById("fotocontent").src = array[x];
+   			$('#TablePage4 tr:last').after(result2);
+   			
+   			document.getElementById("numOfFotos").innerHTML = 'Number of Photos: ' + i;
+   			
+   			//$('#MainPage4 table tr > td:nth-child(2)').on('click', '.runMyFunction', myFunction);
+   			//document.getElementById("fotocontent").src = array[x];
+            }
+		   }
+	});	
+		$.ajax({
+		   type: "GET",
+		   url: "http://www.4yourcloud.com/hgglpics_ios.php",
+			dataType: "json",
+			data: { get_param: 'value' },
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: true,
+			async: "false",
+			cache: "false",
+			contentType: "application/json; charset=utf-8",
+			 error: function (xhr, status) {
+            alert(status);
+        		},	
+		   success: function (fbggljson){  
+		   		//alert(profile.length);
+		   		//$('#content3').html(fbggljson[0].Uid);
+				//$('#content4').html(fbggljson[0].httppath);
+				//$('#content5').html(fbggljson[0].Email);
+				//var fbimage2 = '<img src="' + fbggljson[1].httppath + '" height="20" width="20" />';
+				if (fbggljson) {	
+					 	
+			 	$('#fbpic').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+			 	$('#fbpic2').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+			 	$('#fbpic3').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+			 	$('#fbpic4').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+			 	$('#fbpic5').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+				$('#fbpic6').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+				$('#fbpic7').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+				$('#fbpic8').html('<img src="' + fbggljson[0].httppath + '" height="23" width="23" style="border-radius: 50%;" />');
+				
+			} else 	{
+			
+			alert('hello');
+				$('#fbpic').html('<img src="img/GenPic.png" height="22" width="22" style="border-radius: 50%;" />');
+			 	$('#fbpic2').html('<img src="img/GenPic.png" height="22" width="22" style="border-radius: 50%;" />');
+			 	$('#fbpic3').html('<img src="img/GenPic.png" height="22" width="22" style="border-radius: 50%;" />');
+			 	$('#fbpic4').html('<img src="img/GenPic.png" height="22" width="22" style="border-radius: 50%;" />');
+			 	$('#fbpic5').html('<img src="img/GenPic.png" height="22" width="22" style="border-radius: 50%;" />');
+			 	$('#fbpic6').html('<img src="img/GenPic.png" height="22" width="22" style="border-radius: 50%;" />');	
+		 }}
+	});
+		$.ajax({
+		   type: "GET",
+		   url: "http://www.4yourcloud.com/hfupgradechk_ios.php",
+			dataType: "json",
+			data: { get_param: 'value' },
+			xhrFields: {
+       			withCredentials: true
+  				},
+  			crossDomain: true,
+			async: "false",
+			cache: "false",
+			//data: "key="+key+"&page="+page,
+			contentType: "application/json; charset=utf-8",
+			 error: function (xhr, status) {
+            alert(status);
+        		},	
+		   success: function (acctjson){  
+		   
+		   function humanFileSize(size) {
+    		var j = Math.floor( Math.log(size) / Math.log(1024) );
+  		  	return ( size / Math.pow(1024, j) ).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][j];
+			}
+		   	$('#accsize').html(humanFileSize(acctjson[0].AccSize));
+			$('#accemail').html(acctjson[0].Email);
+			$('#accname').html(acctjson[1].name);
+			$('#accmessage').html(acctjson[1].accountmessage);		
+		   }
+	});			
+$('body').css('font-family', 'Times New Roman, Sans Serif');
+$('header #logotopm:first').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(1)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(2)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(3)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(4)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(5)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(6)').css('backgroundColor', 'DimGray');
+$('header #logotopm:eq(7)').css('backgroundColor', 'DimGray');
+$('header #logotopm:last').css('backgroundColor', 'DimGray');
+$('header').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(0)').css('width', '100%');
+$('header #logotop:eq(1)').css('width', '100%');
+$('header #logotop:eq(2)').css('width', '100%');
+$('header #logotop:eq(3)').css('width', '100%');
+$('header #logotop:eq(4)').css('width', '100%');
+$('header #logotop:eq(5)').css('width', '100%');
+$('header #logotop:eq(6)').css('width', '100%');
+$('header #logotop:eq(7)').css('width', '100%');
+$('header #logotop:eq(0)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(1)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(2)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(3)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(4)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(5)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(6)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(7)').css({"float": "left","text-align": "left"});
+$('header #logotop:eq(0)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(1)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(2)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(3)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(4)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(5)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(6)').css('backgroundColor', 'DarkGray');
+$('header #logotop:eq(7)').css('backgroundColor', 'DarkGray');
+$('#contain .btn-block').css('color', 'whitesmoke');
+$('#contain .btn-block').css('fontWeight', 'normal');
+$('#contain .btn-block').css('width', '75%');
+$('#MainPage5 #contain #textleftbig:eq(0)').css('fontSize', '16px');
+$('#MainPage5 #contain #textleftbig:eq(1)').css('fontSize', '16px');
+$('#MainPage6 #textleftbig').css('fontSize', '16px');
+$('td a').css('fontSize', '12px');
+$('td a').css('color', '#663300');
+$('td a').css('fontWeight', 'normal');
+//$('header #logotopm').css('top', '25px');
+//$('header #yourcloudm').css('top', '25px');
+$('header').css('top', '20px');
+$('content').css('top', '10px');
+$('#MainPage').css('padding', '10px');
+$('#MainPage2').css('padding', '10px');
+$('#MainPage3').css('padding', '10px');
+$('#MainPage4').css('padding', '10px');
+$('#MainPage5').css('padding', '10px');
+$('#MainPage6').css('padding', '10px');
+$('#MainPage7').css('padding', '10px');
+$('#MainPage8').css('padding', '10px');
+$('footer').css('backgroundColor', 'DarkGray');
+//$(".content").css('top', $('header').height() + $("#logotopm").height() + $("#yourcloudm").height() + 20 + "px");
+var globebtn = jQuery('header #logotop:eq(0)');
+var globebtn2 = jQuery('header #logotop:eq(1)');
+var globebtn3 = jQuery('header #logotop:eq(2)');
+var globebtn4 = jQuery('header #logotop:eq(3)');
+var globebtn5 = jQuery('header #logotop:eq(4)');
+var globebtn6 = jQuery('header #logotop:eq(5)');
+var globebtn7 = jQuery('header #logotop:eq(6)');
+var globebtn8 = jQuery('header #logotop:eq(7)');
+var globeimg = jQuery('#logotop img');
+    globebtn.css('padding', '3px');
+    globebtn2.css('padding', '3px');
+    globebtn3.css('padding', '3px');
+    globebtn4.css('padding', '3px');
+    globebtn5.css('padding', '3px');
+    globebtn6.css('padding', '3px');  
+    globebtn7.css('padding', '3px');
+	globebtn8.css('padding', '3px');
+$('#getred').css('width', '100%');	
+$('#getgreen').css('width', '100%');
+		/* Log out */
+	$("#add_err").css('display', 'none', 'important');
+$("#logout").click(function(){	
+		  $.ajax({
+		   type: "POST",
+		   url: "http://www.4yourcloud.com/logout_ios.php",
+		   dataType: "json",
+		   success: function (data){  
+		   //$('#content').html(data);
+		   window.location.href="index.html";
+			if(data.Email == Email)    {
+			//$("#add_err").html("right username or password");
+			 window.location.href="index.html";
+			}
+			else {
+			$("#add_err").css('display', 'inline', 'important');
+			$("#add_err").html("<div id=getred>Error logging out. Try again.</div><br>");
+			}
+		   }
+		   //beforeSend:function()
+		   //{
+			//$("#add_err").css('display', 'inline', 'important');
+			//$("#add_err").html("<img src='images/ajax-loader.gif' /> Loading...")
+		   //}
+		  });
+		return false;
+		disconnectUser();
+	});
+
+/*$('#upload').on('click', function() {
+    	$.ajax({
+        // Your server script to process the upload
+        url: 'http://www.4yourcloud.com/hfupload_ios.php',
+        type: 'POST',
+
+        // Form data
+        data: new FormData($('form')[0]),
+
+        // Tell jQuery not to process data or worry about content-type
+        // You *must* include these options!
+        cache: false,
+        contentType: false,
+        processData: false,
+
+        // Custom XMLHttpRequest
+        xhr: function() {
+            var myXhr = $.ajaxSettings.xhr();
+            if (myXhr.upload) {
+                // For handling the progress of the upload
+                myXhr.upload.addEventListener('progress', function(e) {
+                    if (e.lengthComputable) {
+                        $('progress').attr({
+                            value: e.loaded,
+                            max: e.total,
+                        });
+                    }
+                } , false);
+            }
+            return myXhr;
+        },
+    });
+}); */
+$(':file').change(function(){ //file.change start...
+    var file = this.files[0];
+    name = file.name;
+    size = file.size;
+    type = file.type;
+
+    if(file.name.length < 1) {
+    	$("#add_err").html("<div id=getred>Please select a file to upload</div><br>");
+    }
+    else if(file.size > 52428800) {
+     	$("#add_err").html("<div id=getred>The file size limit is 50MB</div><br>");
+       // alert("The file size limit is 50MB");
+    }
+    else if(file.type != 'image/png' && file.type != 'image/jpg' && file.type != 'image/gif' && file.type != 'image/jpeg' &&
+    file.type != 'audio/mpeg' && file.type != 'application/pdf' && file.type != 'application/msword' && 
+	file.type != 'application/vnd.ms-excel' && file.type != 'video/quicktime' && file.type != 'video/x-generic') {
+		$("#add_err").html("<div id=getred>The file type is not supported</div><br>");
+        //alert("The file type is not supported");
+    }
+    else {  //else...start
+        $(':submit').click(function(){ //submit.click...start
+            var formData = new FormData($('#fileupload')[0]);
+            $.ajax({ //ajax...start
+                url: 'http://www.4yourcloud.com/hfupload_ios.php',  //server script to process data
+                type: 'POST',
+                xhr: function() {  // custom xhr ...start
+                    myXhr = $.ajaxSettings.xhr();
+                    if(myXhr.upload){ // if upload property exists ...start
+                        myXhr.upload.addEventListener('progress', progressHandlingFunction, false); // progressbar
+                    } //if upload exist ...end
+                    return myXhr;
+                }, //custom xhr ... end
+                // Ajax events
+                success: completeHandler = function(data) { //success function...start
+                    // Workaround for Chrome browser // Delete the fake path
+        
+                    if(navigator.userAgent.indexOf('Chrome')) { 
+                        var catchFile = $(":file").val().replace(/C:\\fakepath\\/i, '');
+                    }
+                    else {
+                        var catchFile = $(":file").val();
+                    }
+                    var writeFile = $(":file");
+                    writeFile.html(writer(catchFile));
+                    $("*setIdOfImageInHiddenInput*").val(data.logo_id);
+                }, //success function...end
+                error: errorHandler = function() { //error handler...start
+                    alert("Something went wrong!");
+                }, //error handler...end
+                // Form data
+                data: formData,
+                dataType: "json",
+                // Options to tell jQuery not to process data or worry about the content-type
+                cache: false,
+                contentType: false,
+                processData: false
+            }); //ajax...end
+        }); //submit.click...end
+    } //else ...end
+}); //file.change...end 
+  /*  function scale( width, height, padding, border ) {
+        var scrWidth = $( window ).width() - 30,
+            scrHeight = $( window ).height() - 30,
+            ifrPadding = 2 * padding,
+            ifrBorder = 2 * border,
+            ifrWidth = width + ifrPadding + ifrBorder,
+            ifrHeight = height + ifrPadding + ifrBorder,
+            h, w;
+        if ( ifrWidth < scrWidth && ifrHeight < scrHeight ) {
+            w = ifrWidth;
+            h = ifrHeight;
+        } else if ( ( ifrWidth / scrWidth ) > ( ifrHeight / scrHeight ) ) {
+            w = scrWidth;
+            h = ( scrWidth / ifrWidth ) * ifrHeight;
+        } else {
+            h = scrHeight;
+            w = ( scrHeight / ifrHeight ) * ifrWidth;
+        }
+        return {
+            'width': w - ( ifrPadding + ifrBorder ),
+            'height': h - ( ifrPadding + ifrBorder )
+        };
+    };
+    $( ".ui-popup iframe" )
+        .attr( "width", 0 )
+        .attr( "height", "auto" );
+    $( "#popupVideo" ).on({
+        popupbeforeposition: function() {
+            // call our custom function scale() to get the width and height
+            var size = scale( 497, 298, 15, 1 ),
+                w = size.width,
+                h = size.height;
+            $( "#popupVideo iframe" )
+                .attr( "width", w )
+                .attr( "height", h );
+        },
+        popupafterclose: function() {
+            $( "#popupVideo iframe" )
+                .attr( "width", 0 )
+                .attr( "height", 0 );
+        }
+    });*/
+});
+</script>
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+<script>
+// AJAX code to check input field values when onblur event triggerd.
+function validate(field, query) {
+var xmlhttp;
+if (window.XMLHttpRequest) { // for IE7+, Firefox, Chrome, Opera, Safari
+xmlhttp = new XMLHttpRequest();
+} else { // for IE6, IE5
+xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+}
+xmlhttp.onreadystatechange = function() {
+if (xmlhttp.readyState != 4 && xmlhttp.status == 200) {
+document.getElementById(field).innerHTML = "Validating..";
+} else if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+document.getElementById(field).innerHTML = xmlhttp.responseText;
+} else {
+document.getElementById(field).innerHTML = "Error Occurred. <a href='index.html'>Reload Or Try Again</a> the page.";
+}
+}
+xmlhttp.open("GET", "http://www.4yourcloud.com/validation.php?field=" + field + "&query=" + query, false);
+xmlhttp.send();
+}
+</script>
+<style>
+.ui-icon-directions{
+    background-image:
+    url(../icons/icons-gray/113-navigation.png);
+    height:28px;
+    width:28px;
+    background-size:28px 28px;
+    margin-left: -14px !important;
+}
+.ui-content{
+      font: Times New Roman, Sans Serif;
+      color: #663300;
+  }
+.ui-dialog-contain {
+	width: 92.5%;
+	max-width: 500px;
+	margin: 10% auto 15px auto;
+	padding: 0;
+	position: relative;
+	top: -15px;
+}
+</style>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+<LINK REL=STYLESHEET HREF="css/style1.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/style2.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/style3.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/style4.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/stylecloud.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/styledel.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/font-awesome.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/bootstrap-social.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/bootstrap.css" TYPE="text/css">
+<LINK REL=STYLESHEET HREF="css/index.css" TYPE="text/css">
+</head> <body>
+<!-- begin first page -->
+<section id="page1" data-role="page">
+
+<header data-role="header" data-backbtn="false">
+
+      <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+    <!--<a><img src="/png1a/icon-10355.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-16229.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-19891.png" height="20" width="20"></a>
+		<li><a href='javascript:;'><img src="/png1a/icon-52349.png" height="20" width="20"></a></li>-->
+		<li><a><div id="fbpic"></div></a></li>
+	<!--<a><img src="/png1a/icon-39902.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-40239.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-10355.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-44419.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-44469.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-44536.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-44574.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-44588.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-44704.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-44953.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-45056.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-45177.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-31375.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-54362.png" height="20" width="20"></a>
+		<a><img src="/png1a/icon-63261.png" height="20" width="20"></a>-->
+		</ul></div>
+<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+			</div>
+</header> 
+
+  
+     
+<content class="ui-content" data-role="main">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2?id=1&path=2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage>
+
+<div id=content3></div>
+<div id=content4></div>
+<div id=content5></div>
+<table class="sortable" id="TablePage1">
+      <thead>
+        <tr>       
+          <th><a><i class="fa fa-list" id=fath></i></a></th>
+          <th>Name<a></a></th>
+          <th>Size<a></a></th>
+          <th>Date<a></a></th>        
+        </tr>
+      </thead> 
+<tbody>
+<!--<tr><td></td><td><a href="#page7" data-transition="pop"> test </a></td>
+<td></td><td></td></tr>-->
+</tbody>
+
+</table>
+
+</div>
+</content>
+<footer data-role="footer" class="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#" data-transition="pop"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="flip"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav>
+</footer>
+</section>
+ <!-- end first page -->
+ <!-- begin second page -->
+<section id="page2" data-role="page" data-transition="slidefade" data-direction="reverse">
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic2"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header> 
+<content class="content" data-role="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage2>
+
+<table class="sortable" id="TablePage2">
+      <thead>
+        <tr>       
+          <th><a><i class="fa fa-list" id=fath></i></a></th>
+          <th>Name<a></a></th>
+          <th>Size<a></a></th>
+          <th>Date<a></a></th>        
+        </tr>
+      </thead> 
+      
+<tbody>
+
+</tbody>
+
+</table>
+</div>
+</content>
+<footer data-role="footer" class="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#" data-transition="flip"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="pop"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#" data-transition="flip"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end second page -->
+<!-- begin third page -->
+<section id="page3" data-role="page">
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic3"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage3>
+<table class="table3" id="TablePage3">
+      <thead>
+        <tr>       
+          <th><a><i class="fa fa-list" id=fath></i></a></th>
+          <th>Name<a></a></th>
+          <th>Size<a></a></th>
+          <th>Date<a></a></th>        
+        </tr>
+      </thead> 
+      
+<tbody>
+
+</tbody>
+
+</table>
+
+</div>
+</content>
+<footer data-role="footer" class="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#" data-transition="pop"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="flip"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end third page -->
+<!-- begin fourth page -->
+<section id="page4" data-role="page">
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic4"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage4>
+<table class="sortable" id="TablePage4">
+      <thead>
+        <tr>       
+          <th><a><i class="fa fa-list" id=fath></i></a></th>
+          <th>Name<a></a></th>
+          <th>Size<a></a></th>
+          <th>Date<a></a></th>        
+        </tr>
+      </thead> 
+      
+<tbody>
+
+
+</tbody>
+
+</table>
+</div>
+</content>
+
+<footer data-role="footer" class="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#" data-transition="flip"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="pop"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#" data-transition="flip"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end fourth page -->
+<!-- begin fifth page -->
+<section id="page5" data-role="page">
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic5"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage5>
+<div id=contain>
+<div id=textleftbig>Account Size</div></div>
+<div id=contain>
+<div id=mainleft>Name:</div>
+<div id=mainright><div id="accname"></div></div></div>
+<div id=contain>
+<div id=mainleft>Email Address:</div>
+<div id=mainright><div id="accemail"></div></div></div>
+<div id=contain>
+<div id=mainleft>Total Size:</div>
+<div id=mainright><div id="accsize"></div></div></div>
+<div id=contain>
+<div id=textleftbig>Upgrade Status</div></div>
+<div id=contain>
+<div id=mainleft>Account Status:</div>
+<div id=mainright><div id="accmessage"></div></div></div>
+<div id=contain>
+<form action="#" method="post" id="login-form">
+<div class="err" id="add_err"></div>
+<input type="submit" class="ui-btn ui-shadow" id="logout" name="logout" value="Logout" class="button button1">
+</form></div>
+<img id="foto1" width="100%" height=auto >
+</div>
+</content>
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#" data-transition="pop"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="flip"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end fifth page -->
+<!-- begin sixth page -->
+
+<section id="page6" data-role="page">
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic6"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage6>
+<div class="err" id="add_err"></div>
+<div id=textleftbig>Select Files/Folder To Upload:</div>
+<div id=contain>
+ <form id="fileupload" enctype="multipart/form-data" method="post" name="fileupload" >
+        
+        <input type="file" name="file" id="file" required />
+        <input type="submit" value="Upload" id="upload"/>
+    </form>
+<progress></progress> 
+<div id="output"></div>
+</div></div>
+</content>
+
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#" data-transition="flip"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="pop"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#" data-transition="flip"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end sixth page -->
+<!-- begin 7th page -->
+<section id="page7" data-role="page">
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic7"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage7>
+<div id="id7display"></div>
+<img id="path7display" width="100%" height="250px" >
+<!--<object id="path7display" type="text/plain" width="100%" height="250px"></object>-->
+<div id="http7display"></div>
+<div id="httpLink"></div>
+<div id="numofBooks"></div>
+</div>
+</content>
+
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#" data-transition="pop"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="flip"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#" data-transition="pop"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end 7th page -->
+<!-- begin 8th page -->
+<section id="page8" data-role="page">
+
+<header data-role="header" data-backbtn="false">
+ <div id=logotop><ul class="navtop">
+        <li><a><img src="img/png1a/icon-20087.png" height="20" width="20"></a></li>
+		<li><a><div id="fbpic8"></div></a></li>
+		</ul></div>
+						<div id=logotopm><a>
+							<div id=yourcloudm >Your<i class="fa fa-dot-circle-o"></i>Cloud
+								</div></a>
+							</div></header>							
+<content data-role="content" class="content">
+<nav data-role="navbar">
+<ul>
+<li><a href="#page1" data-transition="pop"><i class="fa fa-home" id=fa15></i></a></li>
+<li><a href="#page2" data-transition="flip"><i class="fa fa-share-alt" id=fa15></i></a></li> 
+<li><a href="#page3" data-transition="pop"><i class="fa fa-book" id=fa15></i></a></li> 
+<li><a href="#page4" data-transition="flip"><i class="fa fa-photo" id=fa15></i></a></li>
+<li><a href="#page5" data-transition="pop"><i class="fa fa-cog" id=fa15></i></a></li>
+</ul></nav>
+<div id=MainPage8>
+<div class="err" id="add_err"></div>
+
+<div id="id9display"></div>
+<img id="path9display" width="100%" height=auto >
+<div id="http9display"></div>
+<img id="fotocontent1" width="100%" height=auto >
+<img id="fotocontent2" width="100%" height=auto >
+<img id="fotocontent3" width="100%" height=auto >
+<div id="numOfFotos"></div>
+<div id="httpFotoLink"></div>
+<div id="httpFotoNum"></div>
+</div>
+</content>
+
+<footer data-role="footer" data-position="fixed">
+<nav data-role="navbar">
+<ul>
+<li><a href="#" data-transition="flip"><i class="fa fa-plus" id=fa15></i><i class="fa fa-folder-o" id=fa15>Folder</i></a></li>
+<li><a href="#page6" data-transition="pop"><i class="fa fa-upload" id=fa15>Upload</i></a></li> 
+<li><a href="#" data-transition="flip"><i class="fa fa-search" id=fa15>Search</i></a></li> 
+</ul></nav></footer>
+</section>
+<!-- end 8th page -->
+<script>
+function disconnectUser() {
+    var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' + accessToken;
+
+    // Perform an asynchronous GET request.
+    $.ajax({
+        type: 'GET',
+        url: revokeUrl,
+        async: false,
+        contentType: "application/json",
+        dataType: 'jsonp',
+        success: function(nullResponse) {
+            // Do something now that user is disconnected
+            // The response is always undefined.
+            accessToken = null;
+            console.log(JSON.stringify(nullResponse));
+            console.log("-----signed out..!!----" + accessToken);
+        },
+        error: function(e) {
+            // Handle the error
+            // console.log(e);
+            // You could point users to manually disconnect if unsuccessful
+            // https://plus.google.com/apps
+        }
+    });
+}
+</script>
+</body>
+</html>
