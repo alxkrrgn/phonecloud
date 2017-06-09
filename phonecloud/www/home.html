@@ -686,12 +686,42 @@ $("#logout").click(function(){
 				$("#TableUpload tr").html("");
 				var head = '<tr><th><a><i class="fa fa-list" id=fath></i></a></th><th>Name<a></a></th><th>Size<a></a></th><th>Date<a></a></th></tr>';
 				$('#TableUpload thead tr:last').after(head);
+				var progressElemUpload = $('#progressCounterUpload');
+				//var URL = "https://api.github.com/users/mralexgray/repos";
+				$("#loadingUpload").hide();
+				// write something in #progressCounter , later will be changed to percentage
+				progressElemUpload.text("Loading...");
                     $.ajax({
                       url: UPLOAD_URL,
                       data: fd,
                       processData: false,
                       contentType: false,
                       type: 'POST',
+                      	error: function (xhr, ajaxOptions, thrownError) {
+        				alert(xhr.responseText);
+        				alert(thrownError);
+    						},
+   				 		xhr: function () {
+        				var xhr = new window.XMLHttpRequest();
+        				//Download progress
+        				xhr.addEventListener("progress", function (evt) {
+            			if (evt.lengthComputable) {
+                		var percentComplete = evt.loaded / evt.total;
+                		progressElemUpload.html(Math.round(percentComplete * 100) + "%");
+            					}
+        					}, false);
+        				return xhr;
+    						},
+    					beforeSend: function () {
+        				$('#loadingUpload').show();
+    						},
+   				 		complete: function () {
+        				$("#loadingUpload").hide();
+        				window.setTimeout(hideBar,1000)
+        				function hideBar() {
+        				$("#progressCounterUpload").hide();
+        						}
+    						},
                       success: function(datafiles){
                         //console.log('upload success!')
                         //$('#data').empty();
@@ -876,7 +906,7 @@ function downloadURL(url) {
   			crossDomain: 'true',
 			cache:'false',
 		   success: function (response){  
-		   			$('#sublength').html(response.length);
+		   			//$('#sublength').html(response.length);
                     k = response.length;
                     /*if (response.email !== undefined) {
                     subfoldermsg += '<div id=textmid>' + response.email + '</div>';
@@ -1380,7 +1410,7 @@ xmlhttp.send();
 </ul></nav>
 <div id=MainPage5>
 <div id=contain>
-<div id=textleftbig>Account Size</div></div>
+<div id=textleftbig>Account Information</div></div>
 <div id=contain>
 <div id=mainleft>Name:</div>
 <div id=mainright><div id="accname"></div></div></div>
@@ -1440,7 +1470,10 @@ xmlhttp.send();
 <div id=textleftbig>Select Files/Folder To Upload:</div>
 <div id=containm></div>
 <div id=contain>
-<div id="message"></div></div>
+<div id="message"></div>
+<div id="progressCounterUpload"></div>
+<div id="loadingUpload"></div>
+</div>
 <div id=contain>
 <form method="post" enctype="multipart/form-data" >
             <input type="file" name="file[]" id="file" size="20" multiple/>

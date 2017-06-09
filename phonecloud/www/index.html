@@ -109,6 +109,11 @@ $( function() {
 	 $("#login_n").click(function(){	
 		  Email=$("#email").val().toLowerCase();
 		  Password=$("#password").val();
+		  		var progressElem = $('#progressCounter');
+				//var URL = "https://api.github.com/users/mralexgray/repos";
+				$("#loading").hide();
+				// write something in #progressCounter , later will be changed to percentage
+				progressElem.text("Loading...");
 		  $.ajax({
 		   type: "POST",
 		   url: "http://www.4yourcloud.com/login_ios.php",
@@ -119,6 +124,32 @@ $( function() {
   				},
   			crossDomain: 'true',
 			cache:"false",
+			error: function (xhr, ajaxOptions, thrownError) {
+        		alert(xhr.responseText);
+        		alert(thrownError);
+    			},
+   				 xhr: function () {
+        		var xhr = new window.XMLHttpRequest();
+        		//Download progress
+        		xhr.addEventListener("progress", function (evt) {
+            	if (evt.lengthComputable) {
+                var percentComplete = evt.loaded / evt.total;
+                progressElem.html(Math.round(percentComplete * 100) + "%");
+            	}
+        		}, false);
+        		return xhr;
+    			},
+    			beforeSend: function () {
+        		$('#loading').show();
+    				},
+   				 complete: function () {
+        		$("#loading").hide();
+        		window.setTimeout(hideBar,1000)
+        		function hideBar() {
+        		$("#progressCounter").hide();
+        		}
+        		//$("#progressCounter").hide();
+    				},
 		   success: function (data){  
 		   //$('#content').html(data.Email);
 			if ((data.Email == Email) && (data.Password == Password))    {
@@ -149,6 +180,11 @@ $( function() {
 		  Password=$("#pwreg").val();
 		  Name=$("#fullname").val();
 		  var messagereg = '';
+		  		var progressElemReg = $('#progressCounterReg');
+				//var URL = "https://api.github.com/users/mralexgray/repos";
+				$("#loadingreg").hide();
+				// write something in #progressCounter , later will be changed to percentage
+				progressElemReg.text("Loading...");
 		  $.ajax({
 		   type: "POST",
 		   url: "http://www.4yourcloud.com/register_ios.php",
@@ -159,6 +195,31 @@ $( function() {
   				},
   			crossDomain: 'true',
 			cache:"false",
+			error: function (xhr, ajaxOptions, thrownError) {
+        		alert(xhr.responseText);
+        		alert(thrownError);
+    			},
+   				 xhr: function () {
+        		var xhr = new window.XMLHttpRequest();
+        		//Download progress
+        		xhr.addEventListener("progress", function (evt) {
+            	if (evt.lengthComputable) {
+                var percentComplete = evt.loaded / evt.total;
+                progressElemReg.html(Math.round(percentComplete * 100) + "%");
+            	}
+        		}, false);
+        		return xhr;
+    			},
+    			beforeSend: function () {
+        		$('#loadingreg').show();
+    				},
+   				 complete: function () {
+        		$("#loadingreg").hide();
+        		window.setTimeout(hideBar,1000)
+        		function hideBar() {
+        		$("#progressCounterReg").hide();
+        		}
+    				},
 		   success: function (result){  
 		   //$('#content1').html(result.Email + " ; " + result.Password);
 		   //$('#content2').html(Email + " ; " + Password);
@@ -411,6 +472,8 @@ function goToURL() {
 <div class="err" id="add_err"></div>
 <div id=content> </div>
 <div id=content1> </div>
+<div id="progressCounter"></div>
+<div id="loading"></div>
 <div id=textleftbig>Login:</div>
 <div id=contain>
 <form action="#" method="post" id="login-form">
@@ -473,6 +536,8 @@ Email: <span id="fbemail"></span>-->
 <div id=MainPage2>
 <div class="err" id="add_erreg"></div>
 <div id="messagereg"></div>
+<div id="progressCounterReg"></div>
+<div id="loadingreg"></div>
 <div id=textleftbig>Register:</div>
 <div id=contain>
 <form action="#" method="post">
@@ -905,7 +970,7 @@ function callGoogle() {
     //  alert('starting');
     googleapi.authorize({
         client_id: '92859681535-hhimp4cvi27pji2hqlrkcsisjmn85iaq.apps.googleusercontent.com',
-        client_secret: '3XgBSe0VQLUy5MqWesZHlRR2',
+        client_secret: 'gR_4VGWqVELY2vx4RaW_Pw4C',
         redirect_uri: 'http://127.0.0.1:3000',
         scope: 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email'
     }).done(function(data) {
