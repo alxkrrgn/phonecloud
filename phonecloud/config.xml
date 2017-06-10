@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.phonegap.phonecloud" version="1.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://4yourcloud.com/ns/1.0">
+<widget id="com.phonegap.phonecloud" version="1.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://4yourcloud.com/ns/1.0">
     <name>phonecloud</name>
     <description>
         Hello World sample application that responds to the deviceready event.
@@ -10,6 +10,8 @@
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
+    <preference name="OverrideUserAgent" value="Mozilla/5.0 My Browser" />
+    <preference name="OverrideUserAgent" value="Mozilla/5.0 Google" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
