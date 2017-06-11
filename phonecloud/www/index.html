@@ -109,11 +109,12 @@ $( function() {
 	 $("#login_n").click(function(){	
 		  Email=$("#email").val().toLowerCase();
 		  Password=$("#password").val();
+		  var messagelogin = '';
 		  		var progressElem = $('#progressCounter');
 				//var URL = "https://api.github.com/users/mralexgray/repos";
 				$("#loading").hide();
 				// write something in #progressCounter , later will be changed to percentage
-				progressElem.text("Loading...");
+				progressElem.text("Loging in...");
 		  $.ajax({
 		   type: "POST",
 		   url: "http://www.4yourcloud.com/login_ios.php",
@@ -151,6 +152,33 @@ $( function() {
         		//$("#progressCounter").hide();
     				},
 		   success: function (data){  
+		   	k = data.length;
+
+		    for (var i = 0; i < k; i++) {
+        			
+        				if (data[i].confirm !== undefined) {
+   						messagelogin += '<div id=getgreen>' + data[i].confirm + '</div>';
+   						window.location.href="home.html";
+   						}
+        		}		
+		    
+		   for (var j = 0; j < k; j++) {
+   					
+   					
+   					if (data[j].warning !== undefined) {
+					messagelogin += '<div id=getred>' + data[j].warning + '</div>';
+					}
+   					}
+		   	$('#messagelogin').html("");
+   			$('#messagelogin').append(messagelogin);
+   			for (var n = 0; n < 100; n++) {
+   			$('#messagelogin').fadeTo('slow', 0.5).fadeTo('slow', 1.0);
+   			$('#messagelogin').fadeTo('slow', 0.4).fadeTo('slow', 1.1);
+   			$('#messagelogin').fadeTo('slow', 0.3).fadeTo('slow', 1.2);
+   			$('#messagelogin').fadeTo('slow', 0.2).fadeTo('slow', 1.3);
+   			$('#messagelogin').fadeTo('slow', 0.1).fadeTo('slow', 1.4);
+   			}
+		   /*
 		   //$('#content').html(data.Email);
 			if ((data.Email == Email) && (data.Password == Password))    {
 			//$("#add_err").html("right username or password");
@@ -164,6 +192,7 @@ $( function() {
 			$("#add_err").css('display', 'inline', 'important');
 			$("#add_err").html("<div id=getred>Wrong email or password</div><br>");
 		   }
+		   */
 		   }
 		   //beforeSend:function()
 		   //{
@@ -184,7 +213,7 @@ $( function() {
 				//var URL = "https://api.github.com/users/mralexgray/repos";
 				$("#loadingreg").hide();
 				// write something in #progressCounter , later will be changed to percentage
-				progressElemReg.text("Loading...");
+				progressElemReg.text("Registering...");
 		  $.ajax({
 		   type: "POST",
 		   url: "http://www.4yourcloud.com/register_ios.php",
@@ -238,7 +267,13 @@ $( function() {
    					
    					$('#messagereg').html("");
    					$('#messagereg').append(messagereg);
-   					
+   					for (var n = 0; n < 100; n++) {
+   						$('#messagereg').fadeTo('slow', 0.5).fadeTo('slow', 1.0);
+   						$('#messagereg').fadeTo('slow', 0.4).fadeTo('slow', 1.1);
+   						$('#messagereg').fadeTo('slow', 0.3).fadeTo('slow', 1.2);
+   						$('#messagereg').fadeTo('slow', 0.2).fadeTo('slow', 1.3);
+   						$('#messagereg').fadeTo('slow', 0.1).fadeTo('slow', 1.4);
+   							}	
 			/*if ((result.Email == Email) && (result.Password == Password))    {
 			//$("#add_err").html("right username or password");
 			 window.location.href="home.html";
@@ -291,6 +326,13 @@ $( function() {
    				}
 		   	$('#msglostpass').html("");
    			$('#msglostpass').append(message12a);
+   			for (var n = 0; n < 100; n++) {
+   						$('#msglostpass').fadeTo('slow', 0.5).fadeTo('slow', 1.0);
+   						$('#msglostpass').fadeTo('slow', 0.4).fadeTo('slow', 1.1);
+   						$('#msglostpass').fadeTo('slow', 0.3).fadeTo('slow', 1.2);
+   						$('#msglostpass').fadeTo('slow', 0.2).fadeTo('slow', 1.3);
+   						$('#msglostpass').fadeTo('slow', 0.1).fadeTo('slow', 1.4);
+   						}
    			}
 		  });
 		return false;
@@ -470,8 +512,7 @@ function goToURL() {
  </ul></nav>
  <div id=MainPage>
 <div class="err" id="add_err"></div>
-<div id=content> </div>
-<div id=content1> </div>
+<div id="messagelogin"></div>
 <div id="progressCounter"></div>
 <div id="loading"></div>
 <div id=textleftbig>Login:</div>

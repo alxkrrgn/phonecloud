@@ -520,14 +520,16 @@ if (formdata) {
             alert(status);
         		},	
 		   success: function (acctjson){  
-		   
-		   function humanFileSize(size) {
-    		var j = Math.floor( Math.log(size) / Math.log(1024) );
-  		  	return ( size / Math.pow(1024, j) ).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][j];
+		   //k = acctjson.length;
+		   function humanFileSize(x) {
+		   if (x == 0) {
+		   	return '0 KB'; } else {
+    		var j = Math.floor( Math.log(x) / Math.log(1024) );
+  		  	return ( x / Math.pow(1024, j) ).toFixed(2) * 1 + ' ' + ['B', 'KB', 'MB', 'GB', 'TB'][j];
 			}
-			if (acctjson[0].AccSize !== undefined) {
+			}
 		   	$('#accsize').html(humanFileSize(acctjson[0].AccSize));
-		   	}
+		   	$('#sizeofAccount').html(acctjson[1].accountSize);
 			$('#accemail').html(acctjson[0].Email);
 			$('#accname').html(acctjson[1].name);
 			$('#accmessage').html(acctjson[1].accountmessage);		
@@ -690,7 +692,7 @@ $("#logout").click(function(){
 				//var URL = "https://api.github.com/users/mralexgray/repos";
 				$("#loadingUpload").hide();
 				// write something in #progressCounter , later will be changed to percentage
-				progressElemUpload.text("Loading...");
+				progressElemUpload.text("Upload in progress...");
                     $.ajax({
                       url: UPLOAD_URL,
                       data: fd,
@@ -716,10 +718,10 @@ $("#logout").click(function(){
         				$('#loadingUpload').show();
     						},
    				 		complete: function () {
-        				$("#loadingUpload").hide();
+        				$("#loadingUpload").html("");
         				window.setTimeout(hideBar,1000)
         				function hideBar() {
-        				$("#progressCounterUpload").hide();
+        				$("#progressCounterUpload").html("");
         						}
     						},
                       success: function(datafiles){
@@ -779,7 +781,14 @@ $("#logout").click(function(){
    					
    					$('#message').html("");
    					$('#message').append(message);
-   				}
+   					for (var n = 0; n < 100; n++) {
+   						$('#message').fadeTo('slow', 0.5).fadeTo('slow', 1.0);
+   						$('#message').fadeTo('slow', 0.4).fadeTo('slow', 1.1);
+   						$('#message').fadeTo('slow', 0.3).fadeTo('slow', 1.2);
+   						$('#message').fadeTo('slow', 0.2).fadeTo('slow', 1.3);
+   						$('#message').fadeTo('slow', 0.1).fadeTo('slow', 1.4);
+   							}	
+   						}
                     });
                     
                 });
