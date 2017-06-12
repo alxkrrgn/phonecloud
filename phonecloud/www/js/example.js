@@ -14,7 +14,7 @@
         "page7",                     // jquery mobile page id which will accept parameters
         ["id", "path"],       // required parameters for that page
         [],                          // optional parameters for that page,
-        function (urlVars7) {
+        function (urlVars7) {    
             $("#id7display").html(urlVars7.id);
             //$("#path9display").html(decodeURIComponent(urlVars.path));
             document.getElementById("path7display").src = decodeURIComponent(urlVars7.path);
@@ -195,8 +195,8 @@
            	$("#subfolder10display").html(subfolders.subFolder);
            	$("#xfolder").html(subfolders.folderName);
            	$("#xsubfolder").html(subfolders.subFolder);
-           	//$("#xfoldertxt").html(subfolders.folderName);
-           	//$("#xsubfoldertxt").html(subfolders.subFolder);
+           	$("#xfoldertxt").html(subfolders.folderName);
+           	$("#xsubfoldertxt").html(subfolders.subFolder);
            	
             //document.getElementById("path7display").setAttribute('data', decodeURIComponent(urlVars7.path));
             //$("#http7display").html(folders.folderName);	
