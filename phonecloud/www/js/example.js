@@ -195,8 +195,8 @@
            	$("#subfolder10display").html(subfolders.subFolder);
            	$("#xfolder").html(subfolders.folderName);
            	$("#xsubfolder").html(subfolders.subFolder);
-           	$("#xfoldertxt").html(subfolders.folderName);
-           	$("#xsubfoldertxt").html(subfolders.subFolder);
+           	//$("#xfoldertxt").html(subfolders.folderName);
+           	//$("#xsubfoldertxt").html(subfolders.subFolder);
            	
             //document.getElementById("path7display").setAttribute('data', decodeURIComponent(urlVars7.path));
             //$("#http7display").html(folders.folderName);	
