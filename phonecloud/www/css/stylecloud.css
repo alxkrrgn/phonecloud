@@ -7,7 +7,7 @@ font-size: 45px; line-height:auto;font-weight:bold; font-style: normal;font-fami
 margin:2px;padding:2px 4px 2px none;text-shadow: 2px 2px LightGoldenRodYellow;white-space:nowrap;
 }
 #yourcloudm { position:relative;width:75%;left:12%;background: none; color:#000033; text-align: center;
-font-size: 45px; line-height:auto;font-weight:bold; font-style: normal;font-family: lucida, sans-serif;letter-spacing: -5px;
+font-size: 40px; line-height:auto;font-weight:bold; font-style: normal;font-family: lucida, sans-serif;letter-spacing: -5px;
 margin:2px;padding:2px 4px 2px none;text-shadow: 2px 2px LightGoldenRodYellow;white-space:nowrap;
 }
 #YCGold { position:relative;width:75%;left:12%;background: none; color:LightGoldenRodYellow; text-align: center;
@@ -354,7 +354,7 @@ border: none;text-shadow: none;letter-spacing: -1px;line-height: 100%;
 #textright { position:relative;float:right;font-size:20px;color:#663300;text-align:right;margin:5px;width:50%;border:none;
 }
 #textleftbig { float:left;position:relative;font-size:20px;color:#000066;text-align:left;margin-left:5%;width:90%;left:0;
-border:1px solid whitesmoke;font-weight:bold;margin-top:10px;margin-bottom:10px;
+border:none;font-weight:bold;margin-top:10px;margin-bottom:10px;
 }
 #fieldleft { position:relative;font-size:20px;color:#663300;text-align:left;margin:5px;width:50%;left:20%;border:none;
 }
@@ -364,17 +364,15 @@ border:1px solid whitesmoke;font-weight:bold;margin-top:10px;margin-bottom:10px;
 }
 #inputButtonOrange20 { font-size: 20px;float:center;border-radius: 8px;width:75%; background:Orange;
 }
-#getred { color:WhiteSmoke; border:1px solid red; border-radius:4px;width:90%;background:red;text-align:center;
+#getred { color:yellow; border:1px solid red; border-radius:4px;width:100%;background:red;text-align:center;
 }
-#getgreen { color:WhiteSmoke; border:1px solid green; border-radius:4px;width:90%;background:green;text-align:center;
+#getgreen { color:yellow; border:1px solid green; border-radius:4px;width:100%;background:green;text-align:center;
 }
 #getblue { color:WhiteSmoke; border:1px solid blue; border-radius:4px;width:90%;background:blue;text-align:center;
 }
 #getdarkred { color:WhiteSmoke; border:1px solid maroon; border-radius:4px;width:90%;background:darkred;text-align:center;
 }
 .getred { color:yellow; border:1px solid red; border-radius:4px;width:100%;background:red;text-align:center;
-}
-.getredx { color:red; border:1px solid yellow; border-radius:4px;width:100%;background:yellow;text-align:center;
 }
 .getgreen { color:yellow; border:1px solid green; border-radius:4px;width:100%;background:green;text-align:center;
 }
@@ -395,10 +393,10 @@ padding:0; margin: 0;overflow:hidden;margin-bottom: 200px;margin-right:1%;margin
 #List {float:left;top:0;background-color:white;border:1px solid WhiteSmoke;height:auto; width:100%;
 padding:0;overflow:hidden;margin-bottom: 450px;
 }
-#mainleft { float:left;left:0;width:27%;border:none;padding:0; margin: 0;
-margin-left:0; text-align:right; color:#393939; font-weight: bold;font-size:17px;line-height:20px;
+#mainleft { float:left;left:0;width:32%;border:none;padding:0; margin: 0;
+margin-left:0; text-align:right; color:#393939; font-weight: bold;font-size:13px;line-height:20px;
 }
-#mainright {float:right;top:0;background-color:none;border: none;height:auto; width:70%;font-size:17px;
+#mainright {float:right;top:0;background-color:none;border: none;height:auto; width:63%;font-size:13px;
 padding:0; margin: 0;overflow:hidden;border:none;text-align:left; color:#800000;line-height:20px;
 }
 #LeftPage { float:left;left:0;width:19%;border:1px solid DimGray;padding:0; margin: 0;background-color:WhiteSmoke;
