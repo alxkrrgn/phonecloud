@@ -368,9 +368,9 @@ border:none;font-weight:bold;margin-top:10px;margin-bottom:10px;
 }
 #getgreen { color:yellow; border:1px solid green; border-radius:4px;width:100%;background:green;text-align:center;
 }
-#getblue { color:WhiteSmoke; border:1px solid blue; border-radius:4px;width:90%;background:blue;text-align:center;
+#getblue { color:yellow; border:1px solid blue; border-radius:4px;width:100%;background:blue;text-align:center;
 }
-#getdarkred { color:WhiteSmoke; border:1px solid maroon; border-radius:4px;width:90%;background:darkred;text-align:center;
+#getdarkred { color:yellow; border:1px solid maroon; border-radius:4px;width:100%;background:darkred;text-align:center;
 }
 .getred { color:yellow; border:1px solid red; border-radius:4px;width:100%;background:red;text-align:center;
 }
